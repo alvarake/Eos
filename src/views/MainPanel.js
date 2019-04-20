@@ -26,6 +26,7 @@ const MainPanel = kind({
 				<Header title={title} />
 				<RouteTree />
 				<Button onClick={onClick}>{text}</Button>
+				<Button onClick={onClick}>{text}</Button>
 			</Panel>
 		);
 	}

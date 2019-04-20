@@ -23,21 +23,20 @@ const App = kind({
 	},
 
 	handlers: {
-		onFirstPanel: (ev, {onNavigate}) => onNavigate({path: '/first'}),
-		onSecondPanel: (ev, {onNavigate}) => onNavigate({path: '/first/second'}),
-		onThirdPanel: (ev, {onNavigate}) => onNavigate({path: '/first/third'}),
-		onFourthPanel: (ev, {onNavigate}) => onNavigate({path: '/first/third/fourth'}),
-		onFirstConfiguration: (ev, {onConfiguration}) => onConfiguration({configuration: 'True'}),
+		onWelcomePanel: (ev, {onNavigate}) => onNavigate({path: '/welcome'}),
+		onSettingsPanel: (ev, {onNavigate}) => onNavigate({path: '/welcome/settings'}),
+		onHomePanel: (ev, {onNavigate}) => onNavigate({path: '/welcome/home'}),
+		onFourthPanel: (ev, {onNavigate}) => onNavigate({path: '/welcome/home/fourth'})
 
 	},
 
-	render: ({onFirstPanel, onFourthPanel, onNavigate, onSecondPanel, onThirdPanel, path, onFirstConfiguration, configuration, ...rest}) => {
+	render: ({onWelcomePanel, onFourthPanel, onNavigate, onSettingsPanel, onHomePanel, path, ...rest}) => {
 		return (
 			<RoutablePanels {...rest} arranger={SlideLeftArranger} onBack={onNavigate} path={path}>
-				<Route path="first" component={Bienvenida} title="¡Buenos días!" onClick={onFirstConfiguration}>
-					<Route path="second" component={MainPanel} next="fourth" title="Second" onClick={onFourthPanel} />
-					<Route path="third" component={MainPanel} next="first" title="Third" onClick={onFirstPanel}>
-						<Route path="fourth" component={MainPanel} next="third" title="Fourth" onClick={onThirdPanel} />
+				<Route path="welcome" component={Bienvenida} title="¡Buenos días!" onClick={onSettingsPanel}>
+					<Route path="settings" component={MainPanel} next="welcome" title="Settings" onClick={onWelcomePanel} />
+					<Route path="home" component={MainPanel} next="welcome" title="Home" onClick={onWelcomePanel}>
+						<Route path="fourth" component={MainPanel} next="home" title="Fourth" onClick={onHomePanel} />
 					</Route>
 				</Route>
 			</RoutablePanels>

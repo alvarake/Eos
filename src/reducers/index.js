@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 
-function path (state = '/first', action) {
+function path (state = '/welcome', action) {
 	switch (action.type) {
 		case 'NAVIGATE':
 			return action.path;
