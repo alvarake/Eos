@@ -15,11 +15,7 @@ const MainPanel = kind({
 		title: PropTypes.string
 	},
 
-	computed: {
-		text: ({next}) => `To ${next} Panel`
-	},
-
-	render: ({title, onClick, text, ...rest}) => {
+	render: ({title, onClick, ...rest}) => {
 		delete rest.next;
 		return (
 			<Panel {...rest}>

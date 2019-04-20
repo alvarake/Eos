@@ -4,6 +4,7 @@ import kind from '@enact/core/kind';
 import {Panel, Header} from '@enact/moonstone/Panels';
 import PropTypes from 'prop-types';
 import React from 'react';
+import RouteTree from './RouteTree';
 import Scroller from '@enact/moonstone/Scroller';
 
 
@@ -31,6 +32,7 @@ const Bienvenida = kind({
 					Recuerda:
 					¡A quién madruga EOS ayuda!
 				</BodyText>
+				<RouteTree />
 			</Scroller>
 		</Panel>
 	)

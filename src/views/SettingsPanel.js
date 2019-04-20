@@ -4,6 +4,9 @@ import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import Repeater from '@enact/ui/Repeater';
+
+import ItemConfig from '../components/ItemConfigurable/ItemConfigurable.js';
 import RouteTree from './RouteTree';
 
 const SettingsPanel = kind({
@@ -12,22 +15,35 @@ const SettingsPanel = kind({
 	propTypes: {
 		next: PropTypes.string,
 		onClick: PropTypes.func,
-		title: PropTypes.string
+		title: PropTypes.string,
+		arrayItems: PropTypes.array
 	},
 
-	computed: {
-		text: ({next}) => `To ${next} Panel`
+	handlers: {
+		onSelectItem: (ev, {onSelectItem}) => {
+				if (onSelectItem) {
+					onSelectItem({
+						item: ev.index
+					});
+				}
+		}
 	},
 
-	render: ({title, onClick, text, ...rest}) => {
+	render: ({title, onClick, onSelectItem, arrayItems, ...rest}) => {
 		delete rest.next;
 		return (
 			<Panel {...rest}>
-				<Header title={title} ><Button onClick={onClick}>Home</Button></Header>
-				<RouteTree />
+				<Header title={title} >
+				<Button onClick={onClick}> Home </Button>
+				</Header>
+
+				<Repeater childComponent={ItemConfig} indexProp="index" itemProps={{onSelect: onSelectItem}}>
+				{arrayItems}
+				</Repeater>
 			</Panel>
 		);
 	}
 });
 
 export default SettingsPanel;
+
