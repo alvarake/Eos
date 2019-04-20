@@ -6,8 +6,8 @@ import React from 'react';
 
 import RouteTree from './RouteTree';
 
-const MainPanel = kind({
-	name: 'MainPanel',
+const SettingsPanel = kind({
+	name: 'SettingsPanel',
 
 	propTypes: {
 		next: PropTypes.string,
@@ -23,13 +23,11 @@ const MainPanel = kind({
 		delete rest.next;
 		return (
 			<Panel {...rest}>
-				<Header title={title}>
-				<Button onClick={onClick}>Configuración</Button>
-				</Header>
+				<Header title={title} ><Button onClick={onClick}>Home</Button></Header>
 				<RouteTree />
 			</Panel>
 		);
 	}
 });
 
-export default MainPanel;
+export default SettingsPanel;

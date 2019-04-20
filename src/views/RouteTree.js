@@ -2,9 +2,8 @@ import React from 'react';
 
 const tree = `    Welcome
     |	\\
-Settings-Home
-	  |
-	Fourth
+Home   Settings
+
 
 `;
 

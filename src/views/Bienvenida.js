@@ -18,7 +18,7 @@ const Bienvenida = kind({
 	render: ({title, onClick, ...rest}) => (
 		<Panel {...rest}>
 			<Header title={title}>
-				<Button onClick={onClick}>To Second Panel</Button>
+				<Button onClick={onClick}>Configuración</Button>
 			</Header>
 			<Scroller>
 				<BodyText>
