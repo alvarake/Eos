@@ -1,8 +1,8 @@
 import React from 'react';
 
-const tree = `    First
+const tree = `    Welcome
     |	\\
-Second	Third
+Settings-Home
 	  |
 	Fourth
 
