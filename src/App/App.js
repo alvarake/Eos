@@ -7,6 +7,7 @@ import {SlideLeftArranger} from '@enact/ui/ViewManager';
 
 import Bienvenida from '../views/Bienvenida';
 import MainPanel from '../views/MainPanel';
+import SettingsPanel from '../views/SettingsPanel';
 
 import AppStateDecorator from './AppStateDecorator';
 
@@ -25,18 +26,18 @@ const App = kind({
 	handlers: {
 		onWelcomePanel: (ev, {onNavigate}) => onNavigate({path: '/welcome'}),
 		onSettingsPanel: (ev, {onNavigate}) => onNavigate({path: '/welcome/settings'}),
-		onHomePanel: (ev, {onNavigate}) => onNavigate({path: '/welcome/home'}),
-		onFourthPanel: (ev, {onNavigate}) => onNavigate({path: '/welcome/home/fourth'})
-
+		onHomePanel: (ev, {onNavigate}) => onNavigate({path: '/welcome/home'})
 	},
 
-	render: ({onWelcomePanel, onFourthPanel, onNavigate, onSettingsPanel, onHomePanel, path, ...rest}) => {
+	render: ({onWelcomePanel, onNavigate, onSettingsPanel, onHomePanel, path, ...rest}) => {
 		return (
 			<RoutablePanels {...rest} arranger={SlideLeftArranger} onBack={onNavigate} path={path}>
 				<Route path="welcome" component={Bienvenida} title="¡Buenos días!" onClick={onSettingsPanel}>
-					<Route path="settings" component={MainPanel} next="welcome" title="Settings" onClick={onWelcomePanel} />
-					<Route path="home" component={MainPanel} next="welcome" title="Home" onClick={onWelcomePanel}>
-						<Route path="fourth" component={MainPanel} next="home" title="Fourth" onClick={onHomePanel} />
+					<Route path="home" component={MainPanel} next="welcome" title="Home" onClick={onSettingsPanel}/>
+					<Route path="settings" component={SettingsPanel} next="welcome" title="Settings" onClick={onHomePanel} >
+						{/* //Music
+						//Alarma
+						//Reloj */}
 					</Route>
 				</Route>
 			</RoutablePanels>
