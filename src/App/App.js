@@ -12,7 +12,13 @@ import SettingsPanel from '../views/SettingsPanel';
 import AppStateDecorator from './AppStateDecorator';
 
 const RoutablePanels = Routable({navigate: 'onBack'}, Panels);
-
+const items = [
+	'music.jpg',
+	'clock.jpg',
+	'bus.jpeg',
+	'newspaper.jpg',
+	'weather.jpg'
+];
 const App = kind({
 	name: 'App',
 
@@ -34,10 +40,8 @@ const App = kind({
 			<RoutablePanels {...rest} arranger={SlideLeftArranger} onBack={onNavigate} path={path}>
 				<Route path="welcome" component={Bienvenida} title="¡Buenos días!" onClick={onSettingsPanel}>
 					<Route path="home" component={MainPanel} next="welcome" title="Home" onClick={onSettingsPanel}/>
-					<Route path="settings" component={SettingsPanel} next="welcome" title="Settings" onClick={onHomePanel} >
-						{/* //Music
-						//Alarma
-						//Reloj */}
+					<Route path="settings" component={SettingsPanel} title="Settings" onClick={onHomePanel} arrayItems={items} >
+						
 					</Route>
 				</Route>
 			</RoutablePanels>
