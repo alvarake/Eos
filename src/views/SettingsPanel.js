@@ -7,7 +7,6 @@ import React from 'react';
 import Repeater from '@enact/ui/Repeater';
 
 import ItemConfig from '../components/ItemConfigurable/ItemConfigurable.js';
-import RouteTree from './RouteTree';
 
 const SettingsPanel = kind({
 	name: 'SettingsPanel',
@@ -20,13 +19,13 @@ const SettingsPanel = kind({
 	},
 
 	handlers: {
-		onSelectItem: (ev, {onSelectItem}) => {
-				if (onSelectItem) {
-					onSelectItem({
-						item: ev.index
-					});
+		onSelectItem: (ev, {onNavigate, arrayItems}) => {
+				if (onNavigate) {
+					onNavigate({path: arrayItems[ev.index].path}
+					);
 				}
 		}
+
 	},
 
 	render: ({title, onClick, onSelectItem, arrayItems, ...rest}) => {
@@ -36,7 +35,6 @@ const SettingsPanel = kind({
 				<Header title={title} >
 				<Button onClick={onClick}> Home </Button>
 				</Header>
-
 				<Repeater childComponent={ItemConfig} indexProp="index" itemProps={{onSelect: onSelectItem}}>
 				{arrayItems}
 				</Repeater>

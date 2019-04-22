@@ -9,14 +9,10 @@ const ItemConfigBase = kind({
 	name: 'ItemConfig',
 
 	propTypes: {
-		children: PropTypes.string,
+		children: PropTypes.array,
 		index: PropTypes.number,
 		onSelect: PropTypes.func,
 		size: PropTypes.number
-	},
-
-	defaultProps: {
-		size: 300
 	},
 	styles: {
 		css,
@@ -32,20 +28,22 @@ const ItemConfigBase = kind({
 	},
 
 	computed: {
-		url: ({children}) => {
-			console.log(children);
-			return `src/components/ItemConfigurable/imagenes/${children}`;
+		url: (children) => {
+			return `src/components/ItemConfigurable/imagenes/${children.url_img}`;
+		},
+		text: (children) => {
+			return `${children.type}`;
 		}
 	},
 
-	render: ({children, onSelect, url, ...rest}) => {
+	render: ({text, onSelect, url, ...rest}) => {
 		delete rest.size;
 		delete rest.index;
 
 		return (
 			<div {...rest} onClick={onSelect}>
 				<img src={url}  width="215" height="400"/>
-				<div>{children}</div>
+				<div>{text}</div>
 			</div>
 		);
 	}
