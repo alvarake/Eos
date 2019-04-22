@@ -1,10 +1,11 @@
 import React from 'react';
 
-const tree = `    Welcome
+const tree = ` 
+   Welcome
     |	\\
-Home   Settings
-
-
+Home       Settings
+        //  |     |  \\
+      Music Alarm Route etc
 `;
 
 const RouteTree = () => (
