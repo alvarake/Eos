@@ -8,19 +8,8 @@ function path (state = '/welcome', action) {
 			return state;
 	}
 }
-
-function configuration (state = "False", action) {
-	switch (action.type) {
-		case 'SET_CONFIGURATION':
-			return action.configuration;
-		default:
-			return state;
-	}
-}
-
 const rootReducer = combineReducers({
-	path,
-	configuration
+	path
 });
 
 export default rootReducer;

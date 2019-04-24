@@ -8,6 +8,7 @@ import {SlideLeftArranger} from '@enact/ui/ViewManager';
 import Bienvenida from '../views/Bienvenida';
 import MainPanel from '../views/MainPanel';
 import SettingsPanel from '../views/SettingsPanel';
+import MusicSettingsPanel from '../views/MusicSettingsPanel'
 
 import AppStateDecorator from './AppStateDecorator';
 
@@ -27,14 +28,6 @@ const items = [
 	news
 ];
 
-/* const items = [
-	'music.jpg',
-	'clock.jpg',
-	'bus.jpeg',
-	'weather.jpg',
-	'newspaper.jpg'
-];
- */
 const App = kind({
 	name: 'App',
 
@@ -57,7 +50,7 @@ const App = kind({
 				<Route path="welcome" component={Bienvenida} title="¡Buenos días!" onClick={onSettingsPanel}>
 					<Route path="home" component={MainPanel} next="welcome" title="Home" onClick={onSettingsPanel}/>
 					<Route path="settings" component={SettingsPanel} title="Settings" arrayItems={items} onClick={onHomePanel}  onNavigate={onNavigate}>
-						<Route path="music" component={MainPanel} title="Music Settings" onClick={onSettingsPanel}/>
+						<Route path="music" component={MusicSettingsPanel} title="Music Settings" onClick={onSettingsPanel}/>
 						<Route path="route" component={MainPanel} title="Route Settings" onClick={onSettingsPanel}/>
 						<Route path="alarm" component={MainPanel} title="Alarm Settings" onClick={onSettingsPanel}/>
 						<Route path="weather" component={MainPanel} title="Weather Settings" onClick={onSettingsPanel}/>

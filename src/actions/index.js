@@ -4,10 +4,3 @@ export const navigate = (path) => {
 		path
 	};
 };
-
-export const setConfiguration = (configuration) => {
-	return {
-		 type: 'SET_CONFIGURATION',
-			configuration
-		};
-  };

@@ -1,7 +1,6 @@
 import {connect} from 'react-redux';
 
 import {navigate} from '../actions';
-import {setConfiguration} from '../actions';
 
 const mapStateToProps = (state) => {
 	return {
@@ -12,8 +11,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onNavigate: ({path}) => dispatch(navigate(path)),
-		onConfiguration: ({configuration}) => dispatch(setConfiguration(configuration))
+		onNavigate: ({path}) => dispatch(navigate(path))
 	};
 };
 
