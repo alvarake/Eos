@@ -44,19 +44,19 @@ const App = kind({
 		onWelcomePanel: (ev, {onNavigate}) => onNavigate({path: '/welcome'}),
 		onSettingsPanel: (ev, {onNavigate}) => onNavigate({path: '/welcome/settings'}),
 		onHomePanel: (ev, {onNavigate}) => onNavigate({path: '/welcome/home'}),
-		onMusicSettings: (ev, {onMusicSettings}) => onMusicSettings({settings: "True"}),
-		onAlarmSettings:(ev, {onAlarmSettings}) => onAlarmSettings({settings: "True"})
+		onMusicSettings: (ev, {settings, onMusicSettings}) => onMusicSettings({settings: !settings.music}),
+		onAlarmSettings:(ev, {settings,onAlarmSettings}) => onAlarmSettings({settings: !settings.alarm})
 	},
 
-	render: ({onNavigate, onMusicSettings, onAlarmSettings, onSettingsPanel, onHomePanel, path, ...rest}) => {
+	render: ({onNavigate, settings, onMusicSettings, onAlarmSettings, onSettingsPanel, onHomePanel, path, ...rest}) => {
 		return (
 			<RoutablePanels {...rest} arranger={SlideLeftArranger} onBack={onNavigate} path={path}>
 				<Route path="welcome" component={Bienvenida} title="¡Buenos días!" onClick={onSettingsPanel}>
 					<Route path="home" component={MainPanel}  title="Home" onClick={onSettingsPanel}/>
-					<Route path="settings" component={SettingsPanel} title="Settings" arrayItems={items} onClick={onHomePanel} onNavigate={onNavigate}>
-						<Route path="music" component={MusicSettingsPanel} title="Music Settings" onClick={onSettingsPanel} onSettings={onMusicSettings}/>
+					<Route path="settings" component={SettingsPanel} title="Settings" arrayItems={items} onClick={onHomePanel} onNavigate={onNavigate} >
+						<Route path="music" component={MusicSettingsPanel} title="Music Settings" onClick={onSettingsPanel} onSettings={onMusicSettings} settings={settings}/>
 						<Route path="route" component={MainPanel} title="Route Settings" onClick={onSettingsPanel}/>
-						<Route path="alarm" component={AlarmSettingsPanel} title="Alarm Settings" onClick={onSettingsPanel} onSettings={onAlarmSettings}/>
+						<Route path="alarm" component={AlarmSettingsPanel} title="Alarm Settings" onClick={onSettingsPanel} onSettings={onAlarmSettings} settings={settings}/>
 						<Route path="weather" component={MainPanel} title="Weather Settings" onClick={onSettingsPanel}/>
 						<Route path="news" component={MainPanel} title="News Settings" onClick={onSettingsPanel}/>
 					</Route>
