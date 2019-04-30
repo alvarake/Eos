@@ -8,7 +8,8 @@ function path (state = '/welcome', action) {
 			return state;
 	}
 }
-function settings (state={}, action){
+const initialState ={music: "False", alarm: "False"}
+function settings (state= initialState, action){
 	switch (action.type) {
 		case 'SET_MUSIC_SETTINGS':
 			//return action.music;
