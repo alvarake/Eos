@@ -35,13 +35,12 @@ const App = kind({
 	propTypes: {
 		onMusicSettings: PropTypes.func,
 		onAlarmSettings: PropTypes.func,
-		settings: PropTypes.string,
+		settings: PropTypes.object,
 		onNavigate: PropTypes.func,
 		path: PropTypes.string
 	},
 
 	handlers: {
-		onWelcomePanel: (ev, {onNavigate}) => onNavigate({path: '/welcome'}),
 		onSettingsPanel: (ev, {onNavigate}) => onNavigate({path: '/welcome/settings'}),
 		onHomePanel: (ev, {onNavigate}) => onNavigate({path: '/welcome/home'}),
 		onMusicSettings: (ev, {settings, onMusicSettings}) => onMusicSettings({settings: !settings.music}),
