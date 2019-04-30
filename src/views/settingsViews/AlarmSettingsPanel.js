@@ -13,14 +13,19 @@ const AlarmSettingsPanel = kind({
 		title: PropTypes.string,
 		settings: PropTypes.string
 	},
+	computed: {
+		text: ({settings}) => `${settings.alarm}`
 
-	render: ({title, settings, onClick, onSettings, ...rest}) => {
+	},
+
+	render: ({title, text, onClick, onSettings, ...rest}) => {
 		return (
 			<Panel {...rest}>
 				<Header title={title}>
 				<Button onClick={onClick}>Atras</Button>
 				</Header>
 				<Button onClick={onSettings}>Configurar Alarma</Button>
+				{text}
 			</Panel>
 		);
 	}
