@@ -4,8 +4,8 @@ import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const MusicSettingsPanel = kind({
-	name: 'MusicSettingsPanel',
+const AlarmSettingsPanel = kind({
+	name: 'AlarmSettingsPanel',
 
 	propTypes: {
 		onClick: PropTypes.func,
@@ -19,10 +19,10 @@ const MusicSettingsPanel = kind({
 				<Header title={title}>
 				<Button onClick={onClick}>Atras</Button>
 				</Header>
-				<Button onClick={onSettings}>Configurar Música</Button>
+				<Button onClick={onSettings}>Configurar Alarma</Button>
 			</Panel>
 		);
 	}
 });
 
-export default MusicSettingsPanel;
+export default AlarmSettingsPanel;

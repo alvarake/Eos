@@ -8,8 +8,26 @@ function path (state = '/welcome', action) {
 			return state;
 	}
 }
+function settings (state={}, action){
+	switch (action.type) {
+		case 'SET_MUSIC_SETTINGS':
+			//return action.music;
+			return {
+				...state,
+				music: action.music
+			}
+		case 'SET_ALARM_SETTINGS':
+		return {
+			...state,
+			alarm: action.alarm
+		}
+		default:
+			return state;
+	}
+}
 const rootReducer = combineReducers({
-	path
+	path,
+	settings
 });
 
 export default rootReducer;
