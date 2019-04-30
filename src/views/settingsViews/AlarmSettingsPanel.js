@@ -10,10 +10,11 @@ const AlarmSettingsPanel = kind({
 	propTypes: {
 		onClick: PropTypes.func,
 		onSettings: PropTypes.func,
-		title: PropTypes.string
+		title: PropTypes.string,
+		settings: PropTypes.string
 	},
 
-	render: ({title, onClick, onSettings, ...rest}) => {
+	render: ({title, settings, onClick, onSettings, ...rest}) => {
 		return (
 			<Panel {...rest}>
 				<Header title={title}>
