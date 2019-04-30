@@ -8,8 +8,8 @@ import {SlideLeftArranger} from '@enact/ui/ViewManager';
 import Bienvenida from '../views/Bienvenida';
 import MainPanel from '../views/MainPanel';
 import SettingsPanel from '../views/SettingsPanel';
-import MusicSettingsPanel from '../views/MusicSettingsPanel'
-import AlarmSettingsPanel from '../views/AlarmSettingsPanel'
+import MusicSettingsPanel from '../views/settingsViews/MusicSettingsPanel'
+import AlarmSettingsPanel from '../views/settingsViews/AlarmSettingsPanel'
 
 import AppStateDecorator from './AppStateDecorator';
 
@@ -44,8 +44,8 @@ const App = kind({
 		onWelcomePanel: (ev, {onNavigate}) => onNavigate({path: '/welcome'}),
 		onSettingsPanel: (ev, {onNavigate}) => onNavigate({path: '/welcome/settings'}),
 		onHomePanel: (ev, {onNavigate}) => onNavigate({path: '/welcome/home'}),
-		onMusicSettings: (ev, {onMusicSettings}) => onMusicSettings({settings: "true"}),
-		onAlarmSettings:(ev, {onAlarmSettings}) => onAlarmSettings({settings: "false"})
+		onMusicSettings: (ev, {onMusicSettings}) => onMusicSettings({settings: "True"}),
+		onAlarmSettings:(ev, {onAlarmSettings}) => onAlarmSettings({settings: "True"})
 	},
 
 	render: ({onNavigate, onMusicSettings, onAlarmSettings, onSettingsPanel, onHomePanel, path, ...rest}) => {
