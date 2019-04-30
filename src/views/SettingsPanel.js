@@ -4,6 +4,7 @@ import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+
 import Repeater from '@enact/ui/Repeater';
 
 import ItemConfig from '../components/ItemConfigurable/ItemConfigurable.js';
@@ -12,7 +13,6 @@ const SettingsPanel = kind({
 	name: 'SettingsPanel',
 
 	propTypes: {
-		next: PropTypes.string,
 		onClick: PropTypes.func,
 		title: PropTypes.string,
 		arrayItems: PropTypes.array
@@ -25,11 +25,9 @@ const SettingsPanel = kind({
 					);
 				}
 		}
-
 	},
 
 	render: ({title, onClick, onSelectItem, arrayItems, ...rest}) => {
-		delete rest.next;
 		return (
 			<Panel {...rest}>
 				<Header title={title} >
