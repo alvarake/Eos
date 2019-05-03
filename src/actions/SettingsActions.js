@@ -1,17 +1,9 @@
-export const navigate = (path) => {
-	return {
-		type: 'NAVIGATE',
-		path
-	};
-};
-
 export const set_music_settings = (music) => {
 	return {
 		type: "SET_MUSIC_SETTINGS",
 		music
 	}
 }
-
 export const set_alarm_settings = (alarm) => {
 	return {
 		type: "SET_ALARM_SETTINGS",

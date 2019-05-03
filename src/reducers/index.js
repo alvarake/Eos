@@ -1,34 +1,13 @@
 import {combineReducers} from 'redux';
+import path from '../reducers/router';
+import settings from '../reducers/settings';
 
-function path (state = '/welcome', action) {
-	switch (action.type) {
-		case 'NAVIGATE':
-			return action.path;
-		default:
-			return state;
-	}
-}
-const initialState ={music: false, alarm: false}
-function settings (state= initialState, action){
-	switch (action.type) {
-		case 'SET_MUSIC_SETTINGS':
-			//return action.music;
-			return {
-				...state,
-				music: action.music
-			}
-		case 'SET_ALARM_SETTINGS':
-		return {
-			...state,
-			alarm: action.alarm
-		}
-		default:
-			return state;
-	}
-}
 const rootReducer = combineReducers({
 	path,
 	settings
 });
 
 export default rootReducer;
+
+
+

@@ -4,8 +4,6 @@ import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import RouteTree from './RouteTree';
-
 const MainPanel = kind({
 	name: 'MainPanel',
 
@@ -22,7 +20,6 @@ const MainPanel = kind({
 				<Header title={title}>
 				<Button onClick={onClick}>Configuración</Button>
 				</Header>
-				<RouteTree />
 			</Panel>
 		);
 	}
