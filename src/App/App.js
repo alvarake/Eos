@@ -12,18 +12,9 @@ import MusicSettingsPanel from '../views/settingsViews/MusicSettingsPanel'
 import AlarmSettingsPanel from '../views/settingsViews/AlarmSettingsPanel'
 
 import AppStateDecorator from '../containers/AppStateDecorator.jsx';
+import items from '../components/ItemConfigurable/items'
 
 const RoutablePanels = Routable({navigate: 'onBack'}, Panels);
-
-let music = {type:'Music', path:'/welcome/settings/music', url_img:'music.jpg'};
-let alarm = {type:'Alarm', path:'/welcome/settings/alarm', url_img:'clock.jpg'};
-let route = {type:'Route', path:'/welcome/settings/route', url_img:'bus.jpeg'};
-let weather = {type:'Weather', path:'/welcome/settings/weather', url_img:'weather.jpg'};
-let news = {type:'News', path:'/welcome/settings/news', url_img:'newspaper.jpg'};
-
-
-const items= [music, alarm, route, weather, news];
-
 const App = kind({
 	name: 'App',
 
