@@ -11,7 +11,7 @@ import SettingsPanel from '../views/SettingsPanel';
 import MusicSettingsPanel from '../views/settingsViews/MusicSettingsPanel'
 import AlarmSettingsPanel from '../views/settingsViews/AlarmSettingsPanel'
 
-import AppStateDecorator from './AppStateDecorator';
+import AppStateDecorator from '../containers/AppStateDecorator';
 
 const RoutablePanels = Routable({navigate: 'onBack'}, Panels);
 

@@ -2,7 +2,6 @@ import {connect} from 'react-redux';
 import {navigate} from '../actions/RouterActions';
 import {set_music_settings, set_alarm_settings} from '../actions/SettingsActions';
 
-
 const mapStateToProps = (state) => {
 	console.log(state)
 	return {
