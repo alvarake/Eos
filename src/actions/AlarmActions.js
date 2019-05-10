@@ -54,7 +54,12 @@ export const notification_createAlert = params => dispatch => {
 		onFailure: (res) => {
 			console.log("Has fallado en hacer la comunicacion")
 			console.log(res);
-	}} );
+		},
+		timeout: 500,
+		onTimeout: () => {
+			console.log("Se agoto el tiempo de espera")
+		}
+	});
 };
 
 export const notification_closeAlert = params => dispatch => {
