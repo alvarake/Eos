@@ -55,12 +55,21 @@ export const notification_createAlert = params => dispatch => {
 			console.log("Has fallado en hacer la comunicacion")
 			console.log(res);
 		},
-		timeout: 500,
+		timeout: 2000,
 		onTimeout: () => {
 			console.log("Se agoto el tiempo de espera")
 		}
 	});
 };
+
+function set_notification (res) {
+	console.log("Res : ")
+	console.log(res)
+	return {
+		type: 'SET_NOTIFICATION',
+		payload: res
+	};
+}
 
 export const notification_closeAlert = params => dispatch => {
 	// possible to dispatch an action at the start of fetching
