@@ -7,13 +7,6 @@ function set_alarm (res) {
 	};
 }
 
-function set_notification (res) {
-	return {
-		type: 'SET_NOTIFICATION',
-		payload: res
-	};
-}
-
 function close_notification (res) {
 	return {
 		type: 'CLOSE_NOTIFICATION',
