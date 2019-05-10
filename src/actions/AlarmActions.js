@@ -38,6 +38,7 @@ export const alarm_set = params => dispatch => {
 };
 
 export const notification_createAlert = params => dispatch => {
+	console.log("entro en el notification")
 	// possible to dispatch an action at the start of fetching
 	// dispatch({type: 'FETCH_SYSETEM_SETTINGS'});
 	return new LS2Request().send({
