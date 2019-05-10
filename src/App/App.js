@@ -33,13 +33,13 @@ const App = kind({
 		onAlarmSettings:(ev, {onAlarmSettings}) => {
 			console.log(ev)
 			console.log("Has puesto un numero")
-			onAlarmSettings({params: {
-				message: "Alarma Puesta por alvaro",
-				buttons:[
-					{label:"button1", onclick:"luna://com.webos.applicationManager/launch", params:{id:"com.webos.app.settings"}},
-					{label:"button2", focus:true},
+			onAlarmSettings({params: `{
+				"message": "Alarma Puesta por alvaro",
+				"buttons":[
+					{"label":"button1", "onclick":"luna://com.webos.applicationManager/launch", "params":{id:"com.webos.app.settings"}},
+					{"label":"button2", "focus":"true"},
 			]
-			}})
+			}`})
 		}
 	},
 
