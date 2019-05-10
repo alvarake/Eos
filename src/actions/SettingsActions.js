@@ -4,12 +4,6 @@ export const set_music_settings = (music) => {
 		music
 	}
 }
-export const set_alarm_settings = (alarm) => {
-	return {
-		type: "SET_ALARM_SETTINGS",
-		alarm
-	}
-}
 export const set_route_settings = (route) => {
 	return {
 		type: "SET_ROUTE_SETTINGS",

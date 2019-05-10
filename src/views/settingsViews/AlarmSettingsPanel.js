@@ -13,18 +13,26 @@ const AlarmSettingsPanel = kind({
 		title: PropTypes.string,
 		settings: PropTypes.string
 	},
-	computed: {
-		text: ({settings}) => `${settings.alarm}`
-
+	handlers:{
+		setAlarmTime: (event, {onSettings}) => {
+			event.preventDefault();
+			const inputAlarmTimeModified = event.target.value + ':00'
+			onSettings(inputAlarmTimeModified)
+		  }
 	},
 
-	render: ({title, text, onClick, onSettings, ...rest}) => {
+	computed: {
+		text: ({settings}) => `${settings.alarm}`
+	},
+
+	render: ({title, text, onClick, setAlarmTime, ...rest}) => {
 		return (
 			<Panel {...rest}>
 				<Header title={title}>
 				<Button onClick={onClick}>Atras</Button>
 				</Header>
-				<Button onClick={onSettings}>Configurar Alarma</Button>
+				<form><input type="time" onChange={setAlarmTime}/>
+				</form>
 				{text}
 			</Panel>
 		);

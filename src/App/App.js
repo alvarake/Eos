@@ -30,7 +30,16 @@ const App = kind({
 		onSettingsPanel: (ev, {onNavigate}) => onNavigate({path: '/welcome/settings'}),
 		onHomePanel: (ev, {onNavigate}) => onNavigate({path: '/welcome/home'}),
 		onMusicSettings: (ev, {settings, onMusicSettings}) => onMusicSettings({settings: !settings.music}),
-		onAlarmSettings:(ev, {settings,onAlarmSettings}) => onAlarmSettings({settings: !settings.alarm})
+		onAlarmSettings:(ev, {onAlarmSettings}) => {
+			console.log(ev)
+			onAlarmSettings({params: {
+				message: "Alarma Puesta por alvaro",
+				buttons:[
+					{label:"button1", onclick:"luna://com.webos.applicationManager/launch", params:{id:"com.webos.app.settings"}},
+					{label:"button2", focus:true},
+			]
+			}})
+		}
 	},
 
 	render: ({onNavigate, settings, onMusicSettings, onAlarmSettings, onSettingsPanel, onHomePanel, path, ...rest}) => {
