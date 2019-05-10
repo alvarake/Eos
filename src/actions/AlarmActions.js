@@ -46,6 +46,7 @@ export const notification_createAlert = params => dispatch => {
 		method: 'createAlert',
 		parameters: params,
 		onSuccess: (res) => {
+			console.log(res)
 			// dispatches action on success callback with payload
 			dispatch(set_notification(res));
 		},
