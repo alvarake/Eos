@@ -32,6 +32,7 @@ const App = kind({
 		onMusicSettings: (ev, {settings, onMusicSettings}) => onMusicSettings({settings: !settings.music}),
 		onAlarmSettings:(ev, {onAlarmSettings}) => {
 			console.log(ev)
+			console.log("Has puesto un numero")
 			onAlarmSettings({
 				message: "Alarma Puesta por alvaro",
 				buttons:[
