@@ -23,8 +23,11 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		onNavigate: ({path}) => dispatch(navigate(path)),
 		onMusicSettings: ({settings}) => dispatch(set_music_settings(settings)),
-		onAlarmSettings: ({params}) => dispatch(notification_createAlert(params))
-	}
+		onAlarmSettings: ({params}) => {
+			console.log({params})
+			console.log("Los params son:" + params)
+			dispatch(notification_createAlert(params))
+	}}
 };
 
 const AppStateDecorator = connect(mapStateToProps, mapDispatchToProps);
