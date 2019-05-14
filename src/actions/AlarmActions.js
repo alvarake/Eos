@@ -35,7 +35,7 @@ export const notification_createAlert = params => dispatch => {
 	// possible to dispatch an action at the start of fetching
 	// dispatch({type: 'FETCH_SYSETEM_SETTINGS'});
 	return new LS2Request().send({
-		service: 'luna://com.webos.notification',
+		service: 'com.webos.notification',
 		method: 'createAlert',
 		parameters: params,
 		onSuccess: (res) => {
