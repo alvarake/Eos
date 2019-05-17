@@ -29,7 +29,7 @@ const ItemConfigBase = kind({
 
 	computed: {
 		url: (children) => {
-			return `src/components/ItemConfigurable/imagenes/${children.url_img}`;
+			return `${children.url_img}`;
 		},
 		text: (children) => {
 			return `${children.type}`;
