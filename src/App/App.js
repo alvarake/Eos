@@ -31,15 +31,21 @@ const App = kind({
 		onHomePanel: (ev, {onNavigate}) => onNavigate({path: '/welcome/home'}),
 		onMusicSettings: (ev, {settings, onMusicSettings}) => onMusicSettings({settings: !settings.music}),
 		onAlarmSettings:(ev, {onAlarmSettings}) => {
-			console.log(ev)
-			console.log("Has puesto un numero")
-			onAlarmSettings({params: `{
-				"message": "Alarma Puesta por alvaro",
-				"buttons":[
-					{"label":"button1", "onclick":"luna://com.webos.applicationManager/launch", "params":{id:"com.webos.app.settings"}},
-					{"label":"button2", "focus":"true"},
-			]
-			}`})
+			let tiempo = `${ev.getHours()}:${ev.getMinutes()}:00`;
+			console.log(tiempo)
+			onAlarmSettings(
+				{
+					params:
+					{
+						key:"test_2",
+						at: "09/24/2020 04:40:00",
+						uri:"luna//com.webos.service.test/alarmFired",
+						params:{},
+						keep_existing: true,
+						wakeup:true
+					},
+				}
+			)
 		}
 	},
 

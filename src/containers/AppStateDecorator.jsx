@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import {navigate} from '../actions/RouterActions';
 import {set_music_settings} from '../actions/SettingsActions';
-import {notification_createAlert} from '../actions/AlarmActions';
+import {alarm_set} from '../actions/AlarmActions';
 
 const mapStateToProps = (state) => {
 	console.log(state)
@@ -10,6 +10,7 @@ const mapStateToProps = (state) => {
 		settings: {
 			music: state.settings.music,
 			alarm: {
+				time: state.settings.alarm.time,
 				notification: {
 					alertId: state.settings.alarm.notification.alertId,
 					returnValue: state.settings.alarm.notification.returnValue
@@ -24,9 +25,9 @@ const mapDispatchToProps = (dispatch) => {
 		onNavigate: ({path}) => dispatch(navigate(path)),
 		onMusicSettings: ({settings}) => dispatch(set_music_settings(settings)),
 		onAlarmSettings: ({params}) => {
-			console.log({params})
-			console.log("Los params son:" + params)
-			dispatch(notification_createAlert(params))
+			console.log("En mapDispatchtoProps Los params son:")
+			console.log(params)
+			dispatch(alarm_set(params))
 	}}
 };
 
