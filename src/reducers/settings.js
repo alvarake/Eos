@@ -1,5 +1,15 @@
-const initialState ={music: false, alarm: {
-	notification: {alertId: "", returnValue:""}}}
+
+
+const initialState ={
+	music: false,
+	alarm: {
+		time: "",
+		notification: {
+			alertId: "",
+			returnValue:""
+		}
+	}
+}
 
 function settings (state= initialState, action){
 	switch (action.type) {
@@ -13,8 +23,18 @@ function settings (state= initialState, action){
 		return {
 			...state,
 			alarm: {
+				...state.alarm,
+				time: action.time
+			}
+		}
+		case 'CREATE_ALARM_TIME':
+		return {
+			...state,
+			alarm: {
+				...state.alarm,
 				key: action.payload.key,
-				returnValue: action.payload.returnValue
+				returnValue: action.payload.returnValue,
+				errorText: action.payload.errorText
 			}
 		}
 		case 'SET_NOTIFICATION':
