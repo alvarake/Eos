@@ -51,9 +51,6 @@ function settings (state= initialState, action){
 			notification: {
 			}
 		}
-
-
-
 		default:
 			return state;
 	}
