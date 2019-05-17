@@ -35,15 +35,22 @@ const App = kind({
 			console.log(tiempo)
 			onAlarmSettings(
 				{
-					params:
+					paramsAlert:
 					{
-						key:"test_2",
-						at: "09/24/2020 04:40:00",
-						uri:"luna//com.webos.service.test/alarmFired",
+						key:"1",
+						in: "00:02:00",
+						// at: "05/17/2019 18:30:00",
+						uri:"luna://com.webos.service.systemservice/time/getSystemTime",
 						params:{},
 						keep_existing: true,
 						wakeup:true
 					},
+					paramsNotification:{
+						sourceId: "eos",
+						message: "Hola mundo",
+
+					}
+
 				}
 			)
 		}
