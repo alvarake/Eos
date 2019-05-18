@@ -1,0 +1,9 @@
+{
+  "id": "eos.service",
+  "description": "HelloWorld Service",
+  "services": [
+    {
+      "name": "eos.service"
+    }
+  ]
+}

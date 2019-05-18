@@ -7,7 +7,7 @@ import React from 'react';
 
 import Repeater from '@enact/ui/Repeater';
 
-import ItemConfig from '../components/ItemConfigurable/ItemConfigurable.js';
+import ItemConfig from '../../components/ItemConfigurable/ItemConfigurable.js';
 
 const SettingsPanel = kind({
 	name: 'SettingsPanel',

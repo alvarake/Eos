@@ -7,11 +7,11 @@ import {SlideLeftArranger} from '@enact/ui/ViewManager';
 
 import Bienvenida from '../views/Bienvenida';
 import MainPanel from '../views/MainPanel';
-import SettingsPanel from '../views/SettingsPanel';
+import SettingsPanel from '../views/settingsViews/SettingsPanel';
 import MusicSettingsPanel from '../views/settingsViews/MusicSettingsPanel'
 import AlarmSettingsPanel from '../views/settingsViews/AlarmSettingsPanel'
 
-import AppStateDecorator from '../containers/AppStateDecorator.jsx';
+import AppStateDecorator from './AppStateDecorator.jsx';
 import items from '../components/ItemConfigurable/items'
 
 const RoutablePanels = Routable({navigate: 'onBack'}, Panels);
