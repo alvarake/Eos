@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import LS2Request from '@enact/webos/LS2Request';
 
+
 const MainPanel = kind({
 	name: 'MainPanel',
 
@@ -32,11 +33,33 @@ const MainPanel = kind({
 				onTimeout: () => {
 					console.log("Se agoto el tiempo de espera")
 				}
+			}
+			);
+		},
+
+		llamadaServicio: (event) => {
+			console.log(event);
+			return new LS2Request().send({
+				service: 'luna://eos.service',
+				method: 'hello',
+				onSuccess: (res) => {
+					console.log("Has tenido exito en hacer la comunicacion")
+					console.log(res)
+				},
+				onFailure: (res) => {
+					console.log("Has fallado en hacer la comunicacion")
+					console.log(res)
+				},
+				timeout: 20000,
+				onTimeout: () => {
+					console.log("Se agoto el tiempo de espera")
+				}
 			});
-		}
+		},
+
 	},
 
-	render: ({title, onClick,pruebaLS2, ...rest}) => {
+	render: ({title, onClick,pruebaLS2,llamadaServicio, ...rest}) => {
 		delete rest.next;
 		return (
 			<Panel {...rest}>
@@ -44,6 +67,7 @@ const MainPanel = kind({
 				<Button onClick={onClick}>Configuración</Button>
 				</Header>
 				<Button onClick={pruebaLS2}>HoraSistema</Button>
+				<Button onClick={llamadaServicio}>ServicioPropio</Button>
 			</Panel>
 		);
 	}
