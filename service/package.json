@@ -1,7 +1,7 @@
 {
   "name": "eos.service",
   "version": "1.0.0",
-  "description": "Helloworld service",
+  "description": "Helloworld service, ejemplo descargado de la página de WebOS TV",
   "main": "helloworld_webos_service.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
