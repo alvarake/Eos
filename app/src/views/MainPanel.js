@@ -17,17 +17,14 @@ const MainPanel = kind({
 	},
 
 	handlers:{
-		pruebaLS2: (event) => {
-			console.log(event);
+		pruebaLS2: () => {
 			return new LS2Request().send({
 				service: 'luna://com.webos.service.systemservice',
 				method: 'time/getSystemTime',
 				onSuccess: (res) => {
-					console.log("Has tenido exito en hacer la comunicacion")
 					console.log(res)
 				},
 				onFailure: (res) => {
-					console.log("Has fallado en hacer la comunicacion")
 					console.log(res)
 				},
 				timeout: 20000,
@@ -38,17 +35,14 @@ const MainPanel = kind({
 			);
 		},
 
-		llamadaHelloWorld: (ev) => {
-			console.log(ev);
+		llamadaHelloWorld: () => {
 			return new LS2Request().send({
 				service: 'luna://eos.service',
 				method: 'hello',
 				onSuccess: (res) => {
-					console.log("Has tenido exito en hacer la comunicacion")
 					console.log(res)
 				},
 				onFailure: (res) => {
-					console.log("Has fallado en hacer la comunicacion")
 					console.log(res)
 				},
 				timeout: 20000,
@@ -59,17 +53,14 @@ const MainPanel = kind({
 		},
 
 		changeGreeting: (ev) => {
-			console.log(ev);
 			return new LS2Request().send({
 				service: 'luna://eos.service',
 				method: 'config/setGreeting',
 				parameters :{greeting: ev.value},
 				onSuccess: (res) => {
-					console.log("Has tenido exito en hacer la comunicacion")
 					console.log(res)
 				},
 				onFailure: (res) => {
-					console.log("Has fallado en hacer la comunicacion")
 					console.log(res)
 				},
 				timeout: 20000,
@@ -78,20 +69,39 @@ const MainPanel = kind({
 				}
 			});
 		},
+		subHeartBeat: (ev) => {
+			console.log(ev)
+			return new LS2Request().send({
+				service: 'luna://eos.service',
+				method: 'heartbeat',
+				parameters :{},
+				subscribe: true,
+				onSuccess: (res) => {
+					console.log(res)
+				},
+				onFailure: (res) => {
+					console.log(res)
+				},
+				timeout: 20000,
+					onTimeout: () => {
+				console.log("Se agoto el tiempo de espera")
+			}
+		});
+	},
 
 	},
 
-	render: ({title, onClick, pruebaLS2, llamadaHelloWorld, changeGreeting, ...rest}) => {
+	render: ({title, onClick, pruebaLS2, llamadaHelloWorld, subHeartBeat, changeGreeting, ...rest}) => {
 		delete rest.next;
 		return (
 			<Panel {...rest}>
-				<Header title={title}>
+				<Header title={title} titleBelow={'Prueba de llamadas a Servicios'}>
 				<Button onClick={onClick}>Configuración</Button>
 				</Header>
-				Prueba de llamadas a Servicios
-				<Input placeholder="Enter Greeting here"  onChange={changeGreeting}/>
-				<Button onClick={llamadaHelloWorld}>Gretting</Button>
 				<Button onClick={pruebaLS2}>HoraSistema</Button>
+				<Input placeholder="Enter Greeting here" onChange={changeGreeting}/>
+				<Button onClick={llamadaHelloWorld}>Gretting</Button>
+				<Button onClick={subHeartBeat}>HeartBeat</Button>
 			</Panel>
 		);
 	}
