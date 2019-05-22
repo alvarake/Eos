@@ -1,0 +1,10 @@
+{
+  "id": "eos.helloservice",
+  "description": "HelloWorld Service",
+  "services": [
+    {
+      "name": "eos.helloservice",
+      "description": "Sample helloworld service"
+    }
+  ]
+}

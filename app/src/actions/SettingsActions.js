@@ -1,9 +1,3 @@
-export const set_music_settings = (music) => {
-	return {
-		type: "SET_MUSIC_SETTINGS",
-		music
-	}
-}
 export const set_route_settings = (route) => {
 	return {
 		type: "SET_ROUTE_SETTINGS",
