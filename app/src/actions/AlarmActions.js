@@ -77,7 +77,7 @@ function set_notification_state(res) {
 		type: 'SET_NOTIFICATION',
 		payload: res
 	};
-}
+};
 
 export const notification_closeAlert = params => dispatch => {
 	// possible to dispatch an action at the start of fetching
@@ -92,12 +92,12 @@ export const notification_closeAlert = params => dispatch => {
 		},
 		onFailure: (res) => {
 			console.log(res);
-	}} );
-};
-
-function close_notification (res) {
-	return {
-		type: 'CLOSE_NOTIFICATION',
-		payload: res
+		}} );
 	};
-}
+
+	function close_notification (res) {
+		return {
+			type: 'CLOSE_NOTIFICATION',
+			payload: res
+		};
+	};

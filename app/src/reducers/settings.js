@@ -1,7 +1,4 @@
-
-
 const initialState ={
-	music: false,
 	alarm: {
 		time: "",
 		notification: {
@@ -13,12 +10,6 @@ const initialState ={
 
 function settings (state= initialState, action){
 	switch (action.type) {
-		case 'SET_MUSIC_SETTINGS':
-			//return action.music;
-			return {
-				...state,
-				music: action.music
-			}
 		case 'SET_ALARM_TIME':
 		return {
 			...state,

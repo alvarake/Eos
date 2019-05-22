@@ -37,7 +37,7 @@ const MainPanel = kind({
 
 		llamadaHelloWorld: () => {
 			return new LS2Request().send({
-				service: 'luna://eos.service',
+				service: 'luna://eos.helloservice',
 				method: 'hello',
 				onSuccess: (res) => {
 					console.log(res)
@@ -54,7 +54,7 @@ const MainPanel = kind({
 
 		changeGreeting: (ev) => {
 			return new LS2Request().send({
-				service: 'luna://eos.service',
+				service: 'luna://eos.helloservice',
 				method: 'config/setGreeting',
 				parameters :{greeting: ev.value},
 				onSuccess: (res) => {
@@ -72,7 +72,7 @@ const MainPanel = kind({
 		subHeartBeat: (ev) => {
 			console.log(ev)
 			return new LS2Request().send({
-				service: 'luna://eos.service',
+				service: 'luna://eos.helloservice',
 				method: 'heartbeat',
 				parameters :{},
 				subscribe: true,
