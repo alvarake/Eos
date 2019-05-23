@@ -19,12 +19,13 @@ const App = kind({
 	name: 'App',
 
 	propTypes: {
+		alarm: PropTypes.object,
 		music: PropTypes.object,
 		onAlarmSettings: PropTypes.func,
 		onMusicSettings: PropTypes.func,
 		onNavigate: PropTypes.func,
-		path: PropTypes.string,
-		settings: PropTypes.object
+		path: PropTypes.string
+
 	},
 
 	handlers: {
@@ -34,7 +35,7 @@ const App = kind({
 		onAlarmSettings:(ev, {onAlarmSettings}) => onAlarmSettings(ev)
 		},
 
-		render: ({music, onAlarmSettings, onHomePanel, onMusicSettings,onNavigate, onSettingsPanel, path, settings, ...rest}) => {
+		render: ({music, onAlarmSettings, onHomePanel, onMusicSettings,onNavigate, onSettingsPanel, path, alarm, ...rest}) => {
 			return (
 				<RoutablePanels {...rest} arranger={SlideLeftArranger} onBack={onNavigate} path={path}>
 					<Route path="welcome" component={Bienvenida} title="¡Buenos días!" onClick={onSettingsPanel}>
@@ -42,7 +43,7 @@ const App = kind({
 						<Route path="settings" component={SettingsPanel} title="Settings" arrayItems={items} onClick={onHomePanel} onNavigate={onNavigate} >
 							<Route path="music" component={MusicSettingsPanel} title="Music Settings" onClick={onSettingsPanel} onSettings={onMusicSettings} music={music}/>
 							<Route path="route" component={MainPanel} title="Route Settings" onClick={onSettingsPanel}/>
-							<Route path="alarm" component={AlarmSettingsPanel} title="Alarm Settings" onClick={onSettingsPanel} onSettings={onAlarmSettings} settings={settings}/>
+							<Route path="alarm" component={AlarmSettingsPanel} title="Alarm Settings" onClick={onSettingsPanel} onSettings={onAlarmSettings} alarm={alarm}/>
 							<Route path="weather" component={MainPanel} title="Weather Settings" onClick={onSettingsPanel}/>
 							<Route path="news" component={MainPanel} title="News Settings" onClick={onSettingsPanel}/>
 						</Route>

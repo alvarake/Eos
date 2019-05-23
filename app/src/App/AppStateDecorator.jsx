@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import {navigate} from '../actions/RouterActions';
 import {unload_Media, load_Media} from '../actions/MusicActions';
-//import {set_alarm, notification_createToast} from '../actions/AlarmActions';
+import {clock_time} from '../actions/AlarmActions';
 
 
 const mapStateToProps = (state) => {
@@ -12,28 +12,25 @@ const mapStateToProps = (state) => {
 			configured: state.music.configured,
 			sound: state.music.sound
 		},
-		settings: {
-			alarm: {
-				time: state.settings.alarm.time,
-				notification: {
-					alertId: state.settings.alarm.notification.alertId,
-					returnValue: state.settings.alarm.notification.returnValue
-				}
+		alarm: {
+			configured: state.alarm.configured,
+			alarmtime: state.alarm.time,
+			alarmtimestamp: state.alarm.alarmtimestamp,
+			notification: {
+				alertId: state.alarm.notification.alertId,
+				returnValue: state.alarm.notification.returnValue
 			}
 		}
 	}
 };
-
+//AQUI SOLO DEBERIAN CREARSE ACCIONES
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onNavigate: ({path}) => dispatch(navigate(path)),
 		onMusicSettings: (music) => (music.configured ? dispatch(unload_Media(music.sound)) : dispatch(load_Media(music))),
-		onAlarmSettings: (params) => {
-			console.log("En mapDispatchtoProps Los params son:")
-			console.log(params)
-
-		}}
-	};
+		onAlarmSettings: (alarmtime) =>dispatch(clock_time(alarmtime))
+	}
+};
 
 	const AppStateDecorator = connect(mapStateToProps, mapDispatchToProps);
 
