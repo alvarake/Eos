@@ -34,11 +34,12 @@ const set_alarm_device = (params) => dispatch => {
 		parameters: {
 			in:"00:00:10",
 			key:"test_alarm",
-			uri:"luna://com.webos.notification/createAlert",
+			uri:"luna://com.webos.notification/createToast",
 			wakeup:true,
 			params:{
 				message: "¡A quién madruga eOS ayuda!",
-				buttons:[{label:"launch",onclick:"luna://com.webos.applicationManager/launch",params:{id:"eos"}}]
+				onclick: {appId:"eos"},
+				sourceId:"eos"
 			}
 		},
 		onSuccess: (res) => {
