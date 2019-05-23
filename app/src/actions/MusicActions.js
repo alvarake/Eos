@@ -7,7 +7,7 @@ export const set_music_settings = (music) => {
 	}
 }
 
-const play_Media = (mediaId)=> {
+export const play_Media = (mediaId)=> {
 	return new LS2Request().send({
 		service: 'luna://com.webos.media',
 		method:"play",
@@ -17,6 +17,23 @@ const play_Media = (mediaId)=> {
 		onSuccess: (res) => {
 			console.log(res)
 			console.log(mediaId)
+		},
+		onFailure: (res) => {
+			console.log(res)
+		},
+	});
+};
+
+export const pause_Media = (mediaId) => {
+	return new LS2Request().send({
+		service: 'luna://com.webos.media',
+		method: 'pause',
+		parameters:{
+			mediaId : mediaId
+		},
+		onSuccess: (res) => {
+			console.log("Se ha pausado el archivo")
+			console.log(res)
 		},
 		onFailure: (res) => {
 			console.log(res)
@@ -44,8 +61,6 @@ export const unload_Media = (mediaId) => dispatch => {
 };
 
 export const load_Media = music => dispatch => {
-	console.log("TERCERO en load_Media es: ")
-	console.log(music)
 	return new LS2Request().send({
 		service: 'luna://com.webos.media',
 		method: 'load',
@@ -63,7 +78,6 @@ export const load_Media = music => dispatch => {
 			console.log(res);
 			music ={sound: res.mediaId, configured:true};
 			dispatch(set_music_settings(music));
-			dispatch(play_Media(res.mediaId));
 		},
 		onFailure: (res) => {
 			console.log(res)

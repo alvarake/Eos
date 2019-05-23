@@ -19,58 +19,34 @@ const App = kind({
 	name: 'App',
 
 	propTypes: {
-		onMusicSettings: PropTypes.func,
-		onAlarmSettings: PropTypes.func,
-		settings: PropTypes.object,
 		music: PropTypes.object,
+		onAlarmSettings: PropTypes.func,
+		onMusicSettings: PropTypes.func,
 		onNavigate: PropTypes.func,
-		path: PropTypes.string
+		path: PropTypes.string,
+		settings: PropTypes.object
 	},
 
 	handlers: {
 		onSettingsPanel: (ev, {onNavigate}) => onNavigate({path: '/welcome/settings'}),
 		onHomePanel: (ev, {onNavigate}) => onNavigate({path: '/welcome/home'}),
-		onMusicSettings: (ev, {music, onMusicSettings}) => {
-			onMusicSettings(music)
-		},
-		onAlarmSettings:(ev, {onAlarmSettings}) => {
-			let tiempo = `${ev.getHours()}:${ev.getMinutes()}:00`;
-			console.log(tiempo)
-			onAlarmSettings(
-				{
-					paramsAlert:{
-						key:"1",
-						in: "00:02:00",
-						// at: "05/17/2019 18:30:00",
-						uri:"luna://com.webos.service.systemservice/time/getSystemTime",
-						params:{},
-						keep_existing: true,
-						wakeup:true
-					},
-					paramsNotification:{
-						sourceId: "eos",
-						message: "Hola mundo",
-
-					}
-
-				}
-				)
-			}
+		onMusicSettings: (ev, {music, onMusicSettings}) => onMusicSettings(music),
+		onAlarmSettings:(ev, {onAlarmSettings}) => onAlarmSettings(ev)
 		},
 
-		render: ({onNavigate, settings, onMusicSettings, onAlarmSettings, onSettingsPanel, onHomePanel, path, ...rest}) => {
+		render: ({music, onAlarmSettings, onHomePanel, onMusicSettings,onNavigate, onSettingsPanel, path, settings, ...rest}) => {
 			return (
 				<RoutablePanels {...rest} arranger={SlideLeftArranger} onBack={onNavigate} path={path}>
-				<Route path="welcome" component={Bienvenida} title="¡Buenos días!" onClick={onSettingsPanel}>
-				<Route path="home" component={MainPanel}  title="Home" onClick={onSettingsPanel}/>
-				<Route path="settings" component={SettingsPanel} title="Settings" arrayItems={items} onClick={onHomePanel} onNavigate={onNavigate} >
-				<Route path="music" component={MusicSettingsPanel} title="Music Settings" onClick={onSettingsPanel} onSettings={onMusicSettings} settings={settings}/>
-				<Route path="route" component={MainPanel} title="Route Settings" onClick={onSettingsPanel}/>
-				<Route path="alarm" component={AlarmSettingsPanel} title="Alarm Settings" onClick={onSettingsPanel} onSettings={onAlarmSettings} settings={settings}/>
-				<Route path="weather" component={MainPanel} title="Weather Settings" onClick={onSettingsPanel}/>
-				<Route path="news" component={MainPanel} title="News Settings" onClick={onSettingsPanel}/>
-				</Route>
-				</Route>
+					<Route path="welcome" component={Bienvenida} title="¡Buenos días!" onClick={onSettingsPanel}>
+						<Route path="home" component={MainPanel}  title="Home" onClick={onSettingsPanel}/>
+						<Route path="settings" component={SettingsPanel} title="Settings" arrayItems={items} onClick={onHomePanel} onNavigate={onNavigate} >
+							<Route path="music" component={MusicSettingsPanel} title="Music Settings" onClick={onSettingsPanel} onSettings={onMusicSettings} music={music}/>
+							<Route path="route" component={MainPanel} title="Route Settings" onClick={onSettingsPanel}/>
+							<Route path="alarm" component={AlarmSettingsPanel} title="Alarm Settings" onClick={onSettingsPanel} onSettings={onAlarmSettings} settings={settings}/>
+							<Route path="weather" component={MainPanel} title="Weather Settings" onClick={onSettingsPanel}/>
+							<Route path="news" component={MainPanel} title="News Settings" onClick={onSettingsPanel}/>
+						</Route>
+					</Route>
 				</RoutablePanels>
 				);
 			}
