@@ -1,43 +1,75 @@
 import LS2Request from '@enact/webos/LS2Request';
 
-function set_alarm_state (time) {
-	console.log("En set_alarm time es: " + time)
+const set_alarm = (alarmtime) => {
 	return {
 		type: 'SET_ALARM_TIME',
-		time
+		alarmtime
 	};
-}
+};
 
-function create_alarm(res) {
-	console.log("En create_alarm res es: ")
-	console.log(res)
-	return{
-		type: 'CREATE_ALARM_TIME',
-		payload: res
+const set_timestamp_alarm = (alarmtimestamp) => {
+	return {
+		type: 'TIME_ALARM_WAS_CREATED',
+		alarmtimestamp
 	};
-}
+};
 
-export const set_alarm = params => dispatch => {
-	console.log("En alar_set params es:")
-	console.log(params.params)
-	dispatch(set_alarm_state(params.at));
+const alarm_configured = (configured) => {
+	return {
+		type: 'ALARM_CONFIGURED',
+		configured
+	};
+};
+
+
+const set_alarm_device = (params) => dispatch => {
+	console.log("Entramos en set_alarm_device")
+	console.log(params.localtime)
+	let dia_de_hoy = params.localtime.day + "/" + params.localtime.month;
+	dispatch(set_timestamp_alarm(dia_de_hoy));
+
 	return new LS2Request().send({
 		service: 'luna://com.webos.service.alarm',
 		method: 'set',
-		parameters: params.params,
+		parameters: {
+			in:"00:00:10",
+			key:"test_alarm",
+			uri:"luna://com.webos.notification/createAlert",
+			wakeup:true,
+			params:{
+				message: "¡A quién madruga eOS ayuda!",
+				buttons:[{label:"launch",onclick:"luna://com.webos.applicationManager/launch",params:{id:"eos"}}]
+			}
+		},
 		onSuccess: (res) => {
 			console.log("He tenido exito")
 			console.log(res)
-			// dispatches action on success callback with payload
-			dispatch(create_alarm(res));
+			dispatch(alarm_configured(true));
 		},
 		onFailure: (res) => {
 			console.log("Has fallado en hacer la comunicacion")
 			console.log(res);
+			dispatch(alarm_configured(false));
+		}
+	});
+};
+
+
+
+export const clock_time = (alarmtime) => dispatch => {
+	console.log("Entramos en clock")
+
+	dispatch(set_alarm(alarmtime));
+
+	return new LS2Request().send({
+		service: 'luna://com.webos.service.systemservice',
+		method: 'time/getSystemTime',
+		onSuccess: (res) => {
+			console.log(res)
+			dispatch(set_alarm_device(res));
 		},
-		timeout: 20000,
-		onTimeout: () => {
-			console.log("Se agoto el tiempo de espera")
+		onFailure: (res) => {
+			console.log(res);
 		}
 	});
 };

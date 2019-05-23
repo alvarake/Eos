@@ -1,33 +1,30 @@
 const initialState ={
-	alarm: {
-		time: "",
-		notification: {
-			alertId: "",
-			returnValue:""
-		}
+	configured: false,
+	alarmtime: "",
+	alarmtimestamp: "",
+	notification: {
+		alertId: "",
+		returnValue:""
 	}
 }
 
-function settings (state= initialState, action){
+function alarm (state= initialState, action){
 	switch (action.type) {
 		case 'SET_ALARM_TIME':
 		return {
 			...state,
-			alarm: {
-				...state.alarm,
-				time: action.time
-			}
+			alarmtime: action.alarmtime
 		}
-		case 'CREATE_ALARM_TIME':
+		case 'TIME_ALARM_WAS_CREATED':
 		return {
 			...state,
-			alarm: {
-				...state.alarm,
-				key: action.payload.key,
-				returnValue: action.payload.returnValue,
-				errorText: action.payload.errorText
-			}
+			alarmtimestamp: action.alarmtimestamp
 		}
+		case 'ALARM_CONFIGURED':
+			return {
+				...state,
+				configured: action.configured
+			}
 		case 'SET_NOTIFICATION':
 		return {
 			...state,
@@ -47,4 +44,4 @@ function settings (state= initialState, action){
 	}
 }
 
-export default settings;
+export default alarm;
