@@ -55,14 +55,14 @@ const set_alarm_device = (params) => dispatch => {
 
 	let dia_de_hoy = params.res.localtime.hour + ":" + params.res.localtime.minute;
 	dispatch(set_timestamp_alarm(dia_de_hoy));
-	console.log("pppppppp")
-	console.log("params.alarmtime.ev")
-	console.log("pppppppp")
-	console.log("music")
 
 	let in_time = time_to_Alert(params.res.localtime, params.alarmtime.ev);
+	let a ="";
+	let b ="";
+	let mediaId =params.alarmtime.music.sound;
 
-	let a = new LS2Request().send({
+	if (mediaId) {
+		 a = new LS2Request().send({
 		service: 'luna://com.webos.service.alarm',
 		method: 'set',
 		parameters: {
@@ -87,9 +87,8 @@ const set_alarm_device = (params) => dispatch => {
 			dispatch(alarm_configured(false));
 		}
 	});
-	let b ="";
-	let mediaId =params.alarmtime.music.sound;
-	if (mediaId) {
+
+
 		b = new LS2Request().send({
 			service: 'luna://com.webos.service.alarm',
 			method: 'set',
@@ -111,6 +110,8 @@ const set_alarm_device = (params) => dispatch => {
 				console.log(res);
 			}
 		});
+	} else {
+		console.log("Primero debes elegir una canción")
 	}
 
 	return {a,b};
