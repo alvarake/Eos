@@ -25,7 +25,6 @@ const alarm_configured = (configured) => {
 const time_to_Alert = (hora_dispositivo, hora_alarma) => {
 
 
-
 	let minutos_dispositivo = parseInt(hora_dispositivo.hour)*60 + parseInt(hora_dispositivo.minute)
 	let alarm_time_min = hora_alarma.split(":");
 	alarm_time_min = parseInt(alarm_time_min[0])*60 + parseInt(alarm_time_min[1]);
@@ -52,18 +51,23 @@ const time_to_Alert = (hora_dispositivo, hora_alarma) => {
 };
 
 const set_alarm_device = (params) => dispatch => {
-	console.log("Entramos en set_alarm_device")
-	let in_time = time_to_Alert(params.res.localtime, params.alarmtime);
+	console.log("Entramos en set_alarm_device");
 
 	let dia_de_hoy = params.res.localtime.hour + ":" + params.res.localtime.minute;
 	dispatch(set_timestamp_alarm(dia_de_hoy));
+	console.log("pppppppp")
+	console.log("params.alarmtime.ev")
+	console.log("pppppppp")
+	console.log("music")
 
-	return new LS2Request().send({
+	let in_time = time_to_Alert(params.res.localtime, params.alarmtime.ev);
+
+	let a = new LS2Request().send({
 		service: 'luna://com.webos.service.alarm',
 		method: 'set',
 		parameters: {
 			in:in_time,
-			key:"test_alarm",
+			key:"toast_alarm",
 			uri:"luna://com.webos.notification/createToast",
 			wakeup:true,
 			params:{
@@ -73,24 +77,52 @@ const set_alarm_device = (params) => dispatch => {
 			}
 		},
 		onSuccess: (res) => {
-			console.log("He tenido exito")
+			console.log("Se ha creado el TOAST_ALERT")
 			console.log(res)
 			dispatch(alarm_configured(true));
 		},
 		onFailure: (res) => {
-			console.log("Has fallado en hacer la comunicacion")
+			console.log("Se ha FALLADO al  crear el TOAST_ALERT")
 			console.log(res);
 			dispatch(alarm_configured(false));
 		}
 	});
-};
+	let b ="";
+	let mediaId =params.alarmtime.music.sound;
+	if (mediaId) {
+		b = new LS2Request().send({
+			service: 'luna://com.webos.service.alarm',
+			method: 'set',
+			parameters: {
+				in:in_time,
+				key:"music_alarm",
+				uri:"luna://com.webos.media/play",
+				wakeup:true,
+				params:{
+					mediaId : mediaId
+				},
+			},
+			onSuccess: (res) => {
+				console.log("Se ha creado el MUSIC_ALERT")
+				console.log(res)
+			},
+			onFailure: (res) => {
+				console.log("Se ha FALLADO al crear el MUSIC_ALERT")
+				console.log(res);
+			}
+		});
+	}
 
+	return {a,b};
+
+
+};
 
 
 export const clock_time = (alarmtime) => dispatch => {
 	console.log("Entramos en clock")
 
-	dispatch(set_alarm(alarmtime));
+	dispatch(set_alarm(alarmtime.ev));
 
 	return new LS2Request().send({
 		service: 'luna://com.webos.service.systemservice',

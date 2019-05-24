@@ -18,9 +18,7 @@ const AlarmSettingsPanel = kind({
 	handlers:{
 		setAlarmTime: (ev, {onSettings}) => {
 			let tiempo = `${ev.value.getHours()}:${ev.value.getMinutes()}`;
-			console.log(`La hora es : ${tiempo}`)
 			onSettings(tiempo);
-
 		}
 	},
 
