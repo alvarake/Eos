@@ -24,16 +24,18 @@ const App = kind({
 		onAlarmSettings: PropTypes.func,
 		onMusicSettings: PropTypes.func,
 		onNavigate: PropTypes.func,
-		path: PropTypes.string
-
+		path: PropTypes.string,
+		state: PropTypes.object
 	},
 
 	handlers: {
 		onSettingsPanel: (ev, {onNavigate}) => onNavigate({path: '/welcome/settings'}),
 		onHomePanel: (ev, {onNavigate}) => onNavigate({path: '/welcome/home'}),
 		onMusicSettings: (ev, {music, onMusicSettings}) => onMusicSettings(music),
-		onAlarmSettings:(ev, {onAlarmSettings}) => onAlarmSettings(ev)
-		},
+		onAlarmSettings:(ev, {music, onAlarmSettings}) => {
+			onAlarmSettings({ev, music})
+		}
+	},
 
 		render: ({music, onAlarmSettings, onHomePanel, onMusicSettings,onNavigate, onSettingsPanel, path, alarm, ...rest}) => {
 			return (
