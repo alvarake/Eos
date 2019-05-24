@@ -22,9 +22,45 @@ const alarm_configured = (configured) => {
 };
 
 
+const time_to_Alert = (hora_dispositivo, hora_alarma) => {
+
+	
+
+	let minutos_dispositivo = parseInt(hora_dispositivo.hour)*60 + parseInt(hora_dispositivo.minute)
+	let alarm_time_min = hora_alarma.split(":");
+	alarm_time_min = parseInt(alarm_time_min[0])*60 + parseInt(alarm_time_min[1]);
+	
+	let differencia_en_minutos =alarm_time_min-minutos_dispositivo;
+
+	if (differencia_en_minutos <0){
+		differencia_en_minutos= differencia_en_minutos+24*60;
+	}
+
+	let horas_para_la_alarma = Math.trunc(differencia_en_minutos/60)
+
+	if (horas_para_la_alarma <10) {
+		horas_para_la_alarma = 0 + horas_para_la_alarma.toString()
+	}
+	let minutos_para_alarma= differencia_en_minutos%60;
+
+	if (minutos_para_alarma <10) {
+		minutos_para_alarma = 0 + minutos_para_alarma.toString()
+	}
+	let resultado_final = horas_para_la_alarma.toString() +':'+ minutos_para_alarma.toString()
+	return resultado_final;
+
+};
+
 const set_alarm_device = (params) => dispatch => {
 	console.log("Entramos en set_alarm_device")
-	console.log(params.localtime)
+	console.log(params.res.localtime)
+	console.log("-----")
+	console.log(params.alarmtime)
+	let in_time = time_to_Alert(params.res.localtime, params.alarmtime);
+	console.log("la hora finallllll")
+	console.log(in_time)
+
+
 	let dia_de_hoy = params.localtime.day + "/" + params.localtime.month;
 	dispatch(set_timestamp_alarm(dia_de_hoy));
 
@@ -67,7 +103,7 @@ export const clock_time = (alarmtime) => dispatch => {
 		method: 'time/getSystemTime',
 		onSuccess: (res) => {
 			console.log(res)
-			dispatch(set_alarm_device(res));
+			dispatch(set_alarm_device({res,alarmtime}));
 		},
 		onFailure: (res) => {
 			console.log(res);
