@@ -24,12 +24,12 @@ const alarm_configured = (configured) => {
 
 const time_to_Alert = (hora_dispositivo, hora_alarma) => {
 
-	
+
 
 	let minutos_dispositivo = parseInt(hora_dispositivo.hour)*60 + parseInt(hora_dispositivo.minute)
 	let alarm_time_min = hora_alarma.split(":");
 	alarm_time_min = parseInt(alarm_time_min[0])*60 + parseInt(alarm_time_min[1]);
-	
+
 	let differencia_en_minutos =alarm_time_min-minutos_dispositivo;
 
 	if (differencia_en_minutos <0){
@@ -46,29 +46,23 @@ const time_to_Alert = (hora_dispositivo, hora_alarma) => {
 	if (minutos_para_alarma <10) {
 		minutos_para_alarma = 0 + minutos_para_alarma.toString()
 	}
-	let resultado_final = horas_para_la_alarma.toString() +':'+ minutos_para_alarma.toString()
+	let resultado_final = horas_para_la_alarma.toString() +':'+ minutos_para_alarma.toString()+":00"
 	return resultado_final;
 
 };
 
 const set_alarm_device = (params) => dispatch => {
 	console.log("Entramos en set_alarm_device")
-	console.log(params.res.localtime)
-	console.log("-----")
-	console.log(params.alarmtime)
 	let in_time = time_to_Alert(params.res.localtime, params.alarmtime);
-	console.log("la hora finallllll")
-	console.log(in_time)
 
-
-	let dia_de_hoy = params.localtime.day + "/" + params.localtime.month;
+	let dia_de_hoy = params.res.localtime.hour + ":" + params.res.localtime.minute;
 	dispatch(set_timestamp_alarm(dia_de_hoy));
 
 	return new LS2Request().send({
 		service: 'luna://com.webos.service.alarm',
 		method: 'set',
 		parameters: {
-			in:"00:00:10",
+			in:in_time,
 			key:"test_alarm",
 			uri:"luna://com.webos.notification/createToast",
 			wakeup:true,
