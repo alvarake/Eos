@@ -10,6 +10,7 @@ import MainPanel from '../views/MainPanel';
 import SettingsPanel from '../views/settingsViews/SettingsPanel';
 import MusicSettingsPanel from '../views/settingsViews/MusicSettingsPanel'
 import AlarmSettingsPanel from '../views/settingsViews/AlarmSettingsPanel'
+import BusSettingsPanel from '../views/settingsViews/BusSettingsPanel'
 
 import AppStateDecorator from './AppStateDecorator.jsx';
 import items from '../components/ItemConfigurable/items'
@@ -44,7 +45,7 @@ const App = kind({
 						<Route path="home" component={MainPanel}  title="Home" onClick={onSettingsPanel}/>
 						<Route path="settings" component={SettingsPanel} title="Settings" arrayItems={items} onClick={onHomePanel} onNavigate={onNavigate} >
 							<Route path="music" component={MusicSettingsPanel} title="Music Settings" onClick={onSettingsPanel} onSettings={onMusicSettings} music={music}/>
-							<Route path="route" component={MainPanel} title="Route Settings" onClick={onSettingsPanel}/>
+							<Route path="route" component={BusSettingsPanel} title="Route Settings" onClick={onSettingsPanel}/>
 							<Route path="alarm" component={AlarmSettingsPanel} title="Alarm Settings" onClick={onSettingsPanel} onSettings={onAlarmSettings} alarm={alarm}/>
 							<Route path="weather" component={MainPanel} title="Weather Settings" onClick={onSettingsPanel}/>
 							<Route path="news" component={MainPanel} title="News Settings" onClick={onSettingsPanel}/>
