@@ -2,7 +2,7 @@
 	"name": "eos",
 	"version": "1.0.0",
 	"description": "A general template for an Enact Moonstone application.",
-	"author": "",
+	"author": "Alvarake",
 	"main": "src/index.js",
 	"scripts": {
 		"serve": "enact serve",
