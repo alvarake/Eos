@@ -42,7 +42,7 @@ const App = kind({
 			return (
 				<RoutablePanels {...rest} arranger={SlideLeftArranger} onBack={onNavigate} path={path}>
 					<Route path="welcome" component={Bienvenida} title="¡Buenos días!" onClick={onSettingsPanel}>
-						<Route path="home" component={MainPanel}  title="Home" onClick={onSettingsPanel}/>
+						<Route path="home" component={MainPanel} title="Home" onClick={onSettingsPanel}/>
 						<Route path="settings" component={SettingsPanel} title="Settings" arrayItems={items} onClick={onHomePanel} onNavigate={onNavigate} >
 							<Route path="music" component={MusicSettingsPanel} title="Music Settings" onClick={onSettingsPanel} onSettings={onMusicSettings} music={music}/>
 							<Route path="route" component={BusSettingsPanel} title="Route Settings" onClick={onSettingsPanel}/>
