@@ -1,9 +1,0 @@
-{
-  "id": "eos.mediaservice",
-  "description": "Servicio para reproducir audio",
-  "services": [
-    {
-      "name": "eos.mediaservice"
-    }
-  ]
-}

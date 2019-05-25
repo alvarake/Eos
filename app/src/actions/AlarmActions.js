@@ -62,7 +62,7 @@ const set_alarm_device = (params) => dispatch => {
 	let mediaId =params.alarmtime.music.sound;
 
 	if (mediaId) {
-		 a = new LS2Request().send({
+		a = new LS2Request().send({
 		service: 'luna://com.webos.service.alarm',
 		method: 'set',
 		parameters: {
@@ -87,7 +87,6 @@ const set_alarm_device = (params) => dispatch => {
 			dispatch(alarm_configured(false));
 		}
 	});
-
 
 		b = new LS2Request().send({
 			service: 'luna://com.webos.service.alarm',
