@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import {navigate} from '../actions/RouterActions';
 import {unload_Media, load_Media} from '../actions/MusicActions';
-import {clock_time} from '../actions/AlarmActions';
+import {calculateDeviceTime} from '../actions/AlarmActions';
 
 
 const mapStateToProps = (state) => {
@@ -28,7 +28,7 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		onNavigate: ({path}) => dispatch(navigate(path)),
 		onMusicSettings: (music) => (music.configured ? dispatch(unload_Media(music.sound)) : dispatch(load_Media(music))),
-		onAlarmSettings: (alarmtime) =>dispatch(clock_time(alarmtime))
+		onAlarmSettings: (alarmtime) =>dispatch(calculateDeviceTime(alarmtime))
 	}
 };
 
