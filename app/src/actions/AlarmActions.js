@@ -62,12 +62,10 @@ const setDeviceAlarm = params => (dispatch) => {
 			onSuccess: (res) => {
 				console.log('Se ha creado el TOAST_ALERT');
 				console.log(res);
-				dispatch(setAlarmConfigured(true));
 			},
 			onFailure: (res) => {
 				console.log('Se ha FALLADO al  crear el TOAST_ALERT');
 				console.log(res);
-				dispatch(setAlarmConfigured(false));
 			},
 		});
 
