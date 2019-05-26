@@ -10,12 +10,6 @@ const setAlarmTimesStamp = alarmtimestamp => ({
 	alarmtimestamp,
 });
 
-const setAlarmConfigured = configured => ({
-	type: 'ALARM_CONFIGURED',
-	configured,
-});
-
-
 const calculateTimeToAlert = (deviceTime, alarmTime) => {
 	const deviceTimeInMins = parseInt(deviceTime.hour, 10) * 60 + parseInt(deviceTime.minute, 10);
 	const alarmTimeInMins = parseInt(alarmTime.split(':')[0], 10) * 60 + parseInt(alarmTime.split(':')[1], 10);
