@@ -1,5 +1,6 @@
 const initialState = {
 	stopid: '',
+	accessToken: '',
 };
 
 function bus(state = initialState, action) {
@@ -8,6 +9,11 @@ function bus(state = initialState, action) {
 		return {
 			...state,
 			stopid: action.stopid,
+		};
+	case 'SET_EMT_ACCESSTOKEN':
+		return {
+			...state,
+			accessToken: action.accessToken,
 		};
 	default:
 		return state;
