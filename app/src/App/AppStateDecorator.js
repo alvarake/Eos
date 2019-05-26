@@ -9,17 +9,14 @@ const mapStateToProps = (state) => {
 	return {
 		path: state.path,
 		music: {
-			configured: state.music.configured,
-			sound: state.music.sound,
+			mediaid: state.music.mediaid,
 		},
 		alarm: {
-			configured: state.alarm.configured,
 			alarmtime: state.alarm.time,
 			alarmtimestamp: state.alarm.alarmtimestamp,
-			notification: {
-				alertId: state.alarm.notification.alertId,
-				returnValue: state.alarm.notification.returnValue,
-			},
+		},
+		bus: {
+			stopid: state.bus.stopid,
 		},
 	};
 };
@@ -27,8 +24,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => ({
 	onNavigate: ({ path }) => dispatch(navigate(path)),
 	// eslint-disable-next-line max-len
-	onMusicSettings: music => (music.configured ? dispatch(unloadMedia(music.sound)) : dispatch(loadMedia())),
-	onAlarmSettings: alarmtime => dispatch(calculateDeviceTime(alarmtime)),
+	onMusicSettings: music => (music.mediaid ? dispatch(unloadMedia(music.mediaid)) : dispatch(loadMedia())),
+	onAlarmSettings: alarmConfig => dispatch(calculateDeviceTime(alarmConfig)),
 });
 
 const AppStateDecorator = connect(mapStateToProps, mapDispatchToProps);

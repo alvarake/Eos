@@ -16,8 +16,8 @@ const MusicSettingsPanel = kind({
 	},
 
 	handlers: {
-		pause: (ev, { music }) => pauseMedia(music.sound),
-		play: (ev, { music }) => playMedia(music.sound),
+		pause: (ev, { music }) => pauseMedia(music.mediaid),
+		play: (ev, { music }) => playMedia(music.mediaid),
 	},
 
 	// eslint-disable-next-line
@@ -27,7 +27,7 @@ const MusicSettingsPanel = kind({
 				<Header title={title}>
 					<Button onClick={onClick}>Atras</Button>
 				</Header>
-				<Button onClick={onSettings}>{music.configured ? 'Borrar Cancion' : 'Cargar Cancion' }</Button>
+				<Button onClick={onSettings}>{music.mediaid ? 'Borrar Cancion' : 'Cargar Cancion' }</Button>
 				<Button onClick={play}>Play</Button>
 				<Button onClick={pause}>Pausar</Button>
 			</Panel>

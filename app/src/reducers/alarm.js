@@ -1,11 +1,6 @@
 const initialState = {
-	configured: false,
 	alarmtime: '',
 	alarmtimestamp: '',
-	notification: {
-		alertId: '',
-		returnValue: '',
-	},
 };
 
 function alarm(state = initialState, action) {
@@ -19,25 +14,6 @@ function alarm(state = initialState, action) {
 		return {
 			...state,
 			alarmtimestamp: action.alarmtimestamp,
-		};
-	case 'ALARM_CONFIGURED':
-		return {
-			...state,
-			configured: action.configured,
-		};
-	case 'SET_NOTIFICATION':
-		return {
-			...state,
-			notification: {
-				alertId: action.payload.alertId,
-				returnValue: action.payload.returnValue,
-			},
-		};
-	case 'CLOSE_NOTIFICATION':
-		return {
-			...state,
-			notification: {
-			},
 		};
 	default:
 		return state;

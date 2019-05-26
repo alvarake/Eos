@@ -44,8 +44,6 @@ const ItemConfigBase = kind({
 		);
 	},
 });
-
 const ItemConfigurable = Spottable(ItemConfigBase);
-
-export default ItemConfigurable;
 export { ItemConfigurable, ItemConfigBase };
+export default ItemConfigurable;

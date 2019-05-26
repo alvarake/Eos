@@ -1,10 +1,10 @@
 import LS2Request from '@enact/webos/LS2Request';
 
-export const setMusicSettings = (music) => {
+export const setMusicSettings = (mediaid) => {
 	console.log('En setMusicSettings');
 	return {
 		type: 'SET_MUSIC_SETTINGS',
-		music,
+		mediaid,
 	};
 };
 
@@ -54,8 +54,7 @@ export const unloadMedia = mediaId => (dispatch) => {
 		onSuccess: (res) => {
 			console.log('Se ha terminado de des-cargar el archivo');
 			console.log(res);
-			const music = { sound: '', configured: false };
-			dispatch(setMusicSettings(music));
+			dispatch(setMusicSettings(''));
 		},
 		onFailure: (res) => {
 			console.log(res);
@@ -81,13 +80,11 @@ export const loadMedia = () => (dispatch) => {
 		onSuccess: (res) => {
 			console.log('Se ha terminado de cargar el archivo');
 			console.log(res);
-			const musicConfingSucces = { sound: res.mediaId, configured: true };
-			dispatch(setMusicSettings(musicConfingSucces));
+			dispatch(setMusicSettings(res.mediaId));
 		},
 		onFailure: (res) => {
 			console.log(res);
-			const musicConfingFailure = { sound: '', configured: false };
-			dispatch(setMusicSettings(musicConfingFailure));
+			dispatch(setMusicSettings(''));
 		},
 	});
 };
