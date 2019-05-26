@@ -1,6 +1,5 @@
 const initialState = {
-	configured: false,
-	sound: '',
+	mediaid: '',
 };
 
 function music(state = initialState, action) {
@@ -8,8 +7,7 @@ function music(state = initialState, action) {
 	case 'SET_MUSIC_SETTINGS':
 		return {
 			...state,
-			configured: action.music.configured,
-			sound: action.music.sound,
+			mediaid: action.mediaid,
 		};
 	default:
 		return state;

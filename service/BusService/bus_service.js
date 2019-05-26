@@ -1,9 +1,5 @@
-// helloworld_webos_service.js
-// simple service, based on low-level Palmbus API
-
 var pkgInfo = require('./package.json');
 var Service = require('webos-service');
-// Register com.yourdomain.@DIR@.service, on both buses
 
 var service = new Service(pkgInfo.name);
 var greeting = "Hello, World!";
@@ -35,14 +31,14 @@ service.register("login", (message) => {
 });
 
 service.register("stopdetail", function(message) {
-	axios.get(`https://openapi.emtmadrid.es/v1/transport/busemtmad/stops/${message.payload.stopid}/detail/`, { headers:{accessToken: accessToken}  }).then(function (response) {
+	const url = `https://openapi.emtmadrid.es/v1/transport/busemtmad/stops/${message.payload.stopid}/detail/`
+	axios.get(url, { headers: { accessToken: accessToken} }).then(function (response) {
 		// handle success
-		
 		message.respond({
 			returnValue: true,
 			message: "Conseguidos los datos",
 			stopid: message.payload.stopid,
-			errordescription: response.data.description,
+			description: response.data.description,
 			data: response.data.data[0]
 		});
 	})
