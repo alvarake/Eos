@@ -32,7 +32,7 @@ service.register("login", (message) => {
 
 service.register("stopdetail", function(message) {
 	const url = `https://openapi.emtmadrid.es/v1/transport/busemtmad/stops/${message.payload.stopid}/detail/`
-	axios.get(url, { headers: { accessToken: accessToken} }).then(function (response) {
+	axios.get(url, { headers: { accessToken: message.payload.accessToken} }).then(function (response) {
 		// handle success
 		message.respond({
 			returnValue: true,
