@@ -1,6 +1,5 @@
-export const navigate = (path) => {
-	return {
-		type: 'NAVIGATE',
-		path
-	};
-};
+const navigate = path => ({
+	type: 'NAVIGATE',
+	path,
+});
+export default navigate;

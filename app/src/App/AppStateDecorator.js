@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { navigate } from '../actions/RouterActions';
+import navigate from '../actions/RouterActions';
 import { unloadMedia, loadMedia } from '../actions/MusicActions';
 import { calculateDeviceTime } from '../actions/AlarmActions';
 
@@ -34,4 +34,3 @@ const mapDispatchToProps = dispatch => ({
 const AppStateDecorator = connect(mapStateToProps, mapDispatchToProps);
 
 export default AppStateDecorator;
-export { AppStateDecorator };

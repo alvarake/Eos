@@ -1,6 +1,7 @@
-{
+module.exports = {
     "extends": "airbnb",
     "rules": {
+        "import/no-extraneous-dependencies": ["error", {"packageDir": __dirname}],
         "indent": ["error", "tab"],
         "no-console": "off",
         "no-plusplus": ["error",

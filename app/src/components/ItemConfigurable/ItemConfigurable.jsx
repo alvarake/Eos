@@ -1,0 +1,51 @@
+import kind from '@enact/core/kind';
+import PropTypes from 'prop-types';
+import React from 'react';
+import Spottable from '@enact/spotlight/Spottable';
+import css from './ItemConfigurable.less';
+
+
+const ItemConfigBase = kind({
+	name: 'ItemConfig',
+
+	propTypes: {
+		children: PropTypes.array,
+		index: PropTypes.number,
+		onSelect: PropTypes.func,
+	},
+
+	styles: {
+		css,
+		className: 'itemConfigurable',
+	},
+
+	handlers: {
+		onSelect: (ev, { index, onSelect }) => {
+			if (onSelect) {
+				onSelect({ index });
+			}
+		},
+	},
+
+	computed: {
+		url: children => `${children.url_img}`,
+		text: children => `${children.type}`,
+	},
+
+	// eslint-disable-next-line object-curly-newline
+	render: ({ text, onSelect, url, ...rest }) => {
+		// eslint-disable-next-line no-param-reassign
+		delete rest.index;
+		return (
+			<div {...rest} onClick={onSelect} onKeyPress={onSelect} role="button" tabIndex="0">
+				<img alt="Menu" src={url} width="215" height="400" />
+				<div>{text}</div>
+			</div>
+		);
+	},
+});
+
+const ItemConfigurable = Spottable(ItemConfigBase);
+
+export default ItemConfigurable;
+export { ItemConfigurable, ItemConfigBase };

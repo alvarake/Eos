@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "A general template for an Enact Moonstone application.",
 	"author": "Alvarake",
-	"main": "src/index.js",
+	"main": "src/index.jsx",
 	"scripts": {
 		"serve": "enact serve",
 		"pack": "enact pack",
