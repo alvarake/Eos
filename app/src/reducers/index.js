@@ -1,15 +1,12 @@
-import {combineReducers} from 'redux';
-import path from '../reducers/router';
-import alarm from '../reducers/alarm';
-import music from '../reducers/music';
+import { combineReducers } from 'redux';
+import path from './router';
+import alarm from './alarm';
+import music from './music';
 
 const rootReducer = combineReducers({
 	path,
 	alarm,
-	music
+	music,
 });
 
 export default rootReducer;
-
-
-

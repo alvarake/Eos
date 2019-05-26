@@ -1,5 +1,5 @@
 import Button from '@enact/moonstone/Button';
-import {Header, Panel} from '@enact/moonstone/Panels';
+import { Header, Panel } from '@enact/moonstone/Panels';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -12,26 +12,27 @@ const AlarmSettingsPanel = kind({
 		alarm: PropTypes.string,
 		onClick: PropTypes.func,
 		onSettings: PropTypes.func,
-		title: PropTypes.string
+		title: PropTypes.string,
 	},
 
-	handlers:{
-		setAlarmTime: (ev, {onSettings}) => {
-			let tiempo = `${ev.value.getHours()}:${ev.value.getMinutes()}`;
+	handlers: {
+		setAlarmTime: (ev, { onSettings }) => {
+			const tiempo = `${ev.value.getHours()}:${ev.value.getMinutes()}`;
 			onSettings(tiempo);
-		}
+		},
 	},
 
-	render: ({title, onClick, setAlarmTime, ...rest}) => {
+	// eslint-disable-next-line
+	render: ({ title, onClick, setAlarmTime, ...rest }) => {
 		return (
 			<Panel {...rest}>
 				<Header title={title}>
-				<Button onClick={onClick}>Atras</Button>
+					<Button onClick={onClick}>Atras</Button>
 				</Header>
-				<TimePicker defaultValue={new Date()} onChange={setAlarmTime}/>
+				<TimePicker defaultValue={new Date()} onChange={setAlarmTime} />
 			</Panel>
 		);
-	}
+	},
 });
 
 export default AlarmSettingsPanel;

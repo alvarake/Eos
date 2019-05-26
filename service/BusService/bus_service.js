@@ -5,8 +5,6 @@ var pkgInfo = require('./package.json');
 var Service = require('webos-service');
 // Register com.yourdomain.@DIR@.service, on both buses
 
-
-
 var service = new Service(pkgInfo.name);
 var greeting = "Hello, World!";
 

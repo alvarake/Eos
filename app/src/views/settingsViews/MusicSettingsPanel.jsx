@@ -20,6 +20,7 @@ const MusicSettingsPanel = kind({
 		play: (ev, { music }) => playMedia(music.sound),
 	},
 
+	// eslint-disable-next-line
 	render: ({ music, onClick, onSettings, pause, play, title, ...rest }) => {
 		return (
 			<Panel {...rest}>
@@ -31,7 +32,7 @@ const MusicSettingsPanel = kind({
 				<Button onClick={pause}>Pausar</Button>
 			</Panel>
 		);
-	}
+	},
 });
 
 export default MusicSettingsPanel;

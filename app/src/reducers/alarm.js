@@ -1,46 +1,46 @@
-const initialState ={
+const initialState = {
 	configured: false,
-	alarmtime: "",
-	alarmtimestamp: "",
+	alarmtime: '',
+	alarmtimestamp: '',
 	notification: {
-		alertId: "",
-		returnValue:""
-	}
-}
+		alertId: '',
+		returnValue: '',
+	},
+};
 
-function alarm (state= initialState, action){
+function alarm(state = initialState, action) {
 	switch (action.type) {
-		case 'SET_ALARM_TIME':
+	case 'SET_ALARM_TIME':
 		return {
 			...state,
-			alarmtime: action.alarmtime
-		}
-		case 'TIME_ALARM_WAS_CREATED':
+			alarmtime: action.alarmtime,
+		};
+	case 'TIME_ALARM_WAS_CREATED':
 		return {
 			...state,
-			alarmtimestamp: action.alarmtimestamp
-		}
-		case 'ALARM_CONFIGURED':
-			return {
-				...state,
-				configured: action.configured
-			}
-		case 'SET_NOTIFICATION':
+			alarmtimestamp: action.alarmtimestamp,
+		};
+	case 'ALARM_CONFIGURED':
+		return {
+			...state,
+			configured: action.configured,
+		};
+	case 'SET_NOTIFICATION':
 		return {
 			...state,
 			notification: {
 				alertId: action.payload.alertId,
-				returnValue: action.payload.returnValue
-			}
-		}
-		case 'CLOSE_NOTIFICATION':
+				returnValue: action.payload.returnValue,
+			},
+		};
+	case 'CLOSE_NOTIFICATION':
 		return {
 			...state,
 			notification: {
-			}
-		}
-		default:
-			return state;
+			},
+		};
+	default:
+		return state;
 	}
 }
 
