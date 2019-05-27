@@ -13,26 +13,19 @@ const SettingsPanel = kind({
 
 	propTypes: {
 		onClick: PropTypes.func,
+		onNavigate: PropTypes.func,
 		title: PropTypes.string,
 		arrayItems: PropTypes.array,
 	},
 
-	handlers: {
-		onSelectItem: (ev, { onNavigate, arrayItems }) => {
-			if (onNavigate) {
-				onNavigate({ path: arrayItems[ev.index].path });
-			}
-		},
-	},
-
 	// eslint-disable-next-line
-	render: ({ title, onClick, onSelectItem, arrayItems, ...rest }) => {
+	render: ({ title, onClick, onNavigate, arrayItems, ...rest }) => {
 		return (
 			<Panel {...rest}>
 				<Header title={title}>
 					<Button onClick={onClick}> Home </Button>
 				</Header>
-				<Repeater childComponent={ItemConfig} indexProp="index" itemProps={{ onSelect: onSelectItem }}>
+				<Repeater childComponent={ItemConfig} indexProp="index" itemProps={{ onSelect: onNavigate }}>
 					{arrayItems}
 				</Repeater>
 			</Panel>

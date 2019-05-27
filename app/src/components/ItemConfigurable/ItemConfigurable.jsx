@@ -20,11 +20,7 @@ const ItemConfigBase = kind({
 	},
 
 	handlers: {
-		onSelect: (ev, { index, onSelect }) => {
-			if (onSelect) {
-				onSelect({ index });
-			}
-		},
+		onSelect: (ev, { path, onSelect }) => (onSelect({ path })),
 	},
 
 	computed: {
