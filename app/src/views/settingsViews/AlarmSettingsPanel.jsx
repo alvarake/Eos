@@ -9,27 +9,19 @@ const AlarmSettingsPanel = kind({
 	name: 'AlarmSettingsPanel',
 
 	propTypes: {
-		alarm: PropTypes.string,
 		onClick: PropTypes.func,
 		onSettings: PropTypes.func,
 		title: PropTypes.string,
 	},
 
-	handlers: {
-		setAlarmTime: (ev, { onSettings }) => {
-			const tiempo = `${ev.value.getHours()}:${ev.value.getMinutes()}`;
-			onSettings(tiempo);
-		},
-	},
-
 	// eslint-disable-next-line
-	render: ({ title, onClick, setAlarmTime, ...rest }) => {
+	render: ({ title, onClick, onSettings, ...rest }) => {
 		return (
 			<Panel {...rest}>
-				<Header title={title}>
+				<Header title={title} titleBelow="Configurando la hora de la alarma.">
 					<Button onClick={onClick}>Atras</Button>
 				</Header>
-				<TimePicker defaultValue={new Date()} onChange={setAlarmTime} />
+				<TimePicker title="¿Cuando quieres despertarte?" defaultValue={new Date()} onChange={onSettings} />
 			</Panel>
 		);
 	},

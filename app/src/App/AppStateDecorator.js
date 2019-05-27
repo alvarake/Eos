@@ -26,7 +26,10 @@ const mapStateToProps = (state) => {
 // dispatch(loadStopInfo({ stopid: busConfig.newStopId, accessToken: busConfig.bus.accessToken }));
 
 const mapDispatchToProps = dispatch => ({
-	onNavigate: ({ path }) => dispatch(navigate(path)),
+	onNavigate: ({ path }) => {
+		console.log(`En mapDispatchToProps ${path}`);
+		dispatch(navigate(path));
+	},
 	// eslint-disable-next-line max-len
 	onMusicSettings: music => (music.mediaid ? dispatch(unloadMedia(music.mediaid)) : dispatch(loadMedia())),
 	onAlarmSettings: alarmConfig => dispatch(calculateDeviceTime(alarmConfig)),
