@@ -22,7 +22,7 @@ const SettingsPanel = kind({
 	render: ({ title, onClick, onNavigate, arrayItems, ...rest }) => {
 		return (
 			<Panel {...rest}>
-				<Header title={title}>
+				<Header title={title} titleBelow="Menú de configuración.">
 					<Button onClick={onClick}> Home </Button>
 				</Header>
 				<Repeater childComponent={ItemConfig} indexProp="index" itemProps={{ onSelect: onNavigate }}>
