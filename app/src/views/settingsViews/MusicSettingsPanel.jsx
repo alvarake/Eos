@@ -24,7 +24,7 @@ const MusicSettingsPanel = kind({
 	render: ({ music, onClick, onSettings, pause, play, title, ...rest }) => {
 		return (
 			<Panel {...rest}>
-				<Header title={title}>
+				<Header title={title} titleBelow="Configurando el sonido de la alarma.">
 					<Button onClick={onClick}>Atras</Button>
 				</Header>
 				<Button onClick={onSettings}>{music.mediaid ? 'Borrar Cancion' : 'Cargar Cancion' }</Button>

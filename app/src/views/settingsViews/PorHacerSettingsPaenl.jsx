@@ -1,32 +1,30 @@
 import Button from '@enact/moonstone/Button';
-import Input from '@enact/moonstone/Input';
 import { Header, Panel } from '@enact/moonstone/Panels';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const BusSettingsPanel = kind({
-	name: 'BusSettingsPanel',
+const MainPanel = kind({
+	name: 'PorHacerSettingsPanel',
 
 	propTypes: {
+		next: PropTypes.string,
 		onClick: PropTypes.func,
-		onSettings: PropTypes.func,
 		title: PropTypes.string,
 	},
 
+
 	// eslint-disable-next-line
-	render: ({ title, onClick, onSettings, ...rest }) => {
+	render: ({ title, onClick, llamadaHelloWorld, subHeartBeat, changeGreeting, ...rest }) => {
 		delete rest.next;
 		return (
 			<Panel {...rest}>
-				<Header title={title} titleBelow="Configurando la parada de bus.">
+				<Header title={title} titleBelow="Por hacer.">
 					<Button onClick={onClick}>Configuración</Button>
 				</Header>
-				Introduce el numero de parada de autobus sobre el que quieres información
-				<Input placeholder="Enter STOP id" onChange={onSettings} />
 			</Panel>
 		);
 	},
 });
 
-export default BusSettingsPanel;
+export default MainPanel;

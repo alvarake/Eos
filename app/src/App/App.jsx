@@ -11,6 +11,7 @@ import SettingsPanel from '../views/settingsViews/SettingsPanel';
 import MusicSettingsPanel from '../views/settingsViews/MusicSettingsPanel';
 import AlarmSettingsPanel from '../views/settingsViews/AlarmSettingsPanel';
 import BusSettingsPanel from '../views/settingsViews/BusSettingsPanel';
+import PorHacerSettingsPanel from '../views/settingsViews/PorHacerSettingsPaenl';
 
 import AppStateDecorator from './AppStateDecorator';
 
@@ -35,8 +36,11 @@ const App = kind({
 		onSettingsPanel: (ev, { onNavigate }) => onNavigate({ path: '/welcome/settings' }),
 		onHomePanel: (ev, { onNavigate }) => onNavigate({ path: '/welcome/home' }),
 		onMusicSettings: (ev, { music, onMusicSettings }) => onMusicSettings(music),
-		onAlarmSettings: (ev, { music, onAlarmSettings }) => onAlarmSettings({ ev, music }),
-		onBusSettings: (newStopId, { bus, onBusSettings }) => onBusSettings({ newStopId, bus }),
+		onAlarmSettings: (ev, { music, onAlarmSettings }) => {
+			const tiempo = `${ev.value.getHours()}:${ev.value.getMinutes()}`;
+			onAlarmSettings({ tiempo, music });
+		},
+		onBusSettings: (ev, { bus, onBusSettings }) => onBusSettings({ newStopId: ev.value, bus }),
 	},
 
 	// eslint-disable-next-line
@@ -45,12 +49,12 @@ const App = kind({
 			<RoutablePanels {...rest} arranger={SlideLeftArranger} onBack={onNavigate} path={path}>
 				<Route path="welcome" component={Bienvenida} title="¡Buenos días!" onClick={onSettingsPanel}>
 					<Route path="home" component={MainPanel} title="Home" onClick={onSettingsPanel} />
-					<Route path="settings" component={SettingsPanel} title="Settings" arrayItems={items} onClick={onHomePanel} onNavigate={onNavigate}>
-						<Route path="music" component={MusicSettingsPanel} title="Music Settings" onClick={onSettingsPanel} onSettings={onMusicSettings} music={music} />
-						<Route path="route" component={BusSettingsPanel} title="Bus Settings" onClick={onSettingsPanel} onSettings={onBusSettings} />
-						<Route path="alarm" component={AlarmSettingsPanel} title="Alarm Settings" onClick={onSettingsPanel} onSettings={onAlarmSettings} alarm={alarm} />
-						<Route path="weather" component={MainPanel} title="Weather Settings" onClick={onSettingsPanel} />
-						<Route path="news" component={MainPanel} title="News Settings" onClick={onSettingsPanel} />
+					<Route path="settings" component={SettingsPanel} title="Configuración" arrayItems={items} onClick={onHomePanel} onNavigate={onNavigate}>
+						<Route path="music" component={MusicSettingsPanel} title="Música" onClick={onSettingsPanel} onSettings={onMusicSettings} music={music} />
+						<Route path="alarm" component={AlarmSettingsPanel} title="Alarma" onClick={onSettingsPanel} onSettings={onAlarmSettings} />
+						<Route path="route" component={BusSettingsPanel} title="Parada de Bus" onClick={onSettingsPanel} onSettings={onBusSettings} />
+						<Route path="weather" component={PorHacerSettingsPanel} title="Tiempo Atmosférico" onClick={onSettingsPanel} />
+						<Route path="news" component={PorHacerSettingsPanel} title="Noticias" onClick={onSettingsPanel} />
 					</Route>
 				</Route>
 			</RoutablePanels>
