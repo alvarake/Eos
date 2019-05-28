@@ -51,7 +51,20 @@ service.register('stopdetail', (message) => {
 	})
 });
 
-service.register('arrivalbus', (message) => {
+const arrivalBus = service.register("arrivalbus");
+let interval;
+let subscriptions = {};
+function createInterval(message) {
+	if (interval) {
+		return;
+	}
+	console.log("create new interval");
+	interval = setInterval(function() {
+		sendResponses(message);
+	}, 5000);
+}
+
+function sendResponses(message) {
 	const stopid = message.payload.stopid;
 	const accessToken = message.payload.accessToken;
 	const url = `https://openapi.emtmadrid.es/v1/transport/busemtmad/stops/${stopid}/arrives/`;
@@ -68,27 +81,50 @@ service.register('arrivalbus', (message) => {
 		Text_IncidencesRequired_YN: 'Y',
 		DateTime_Referenced_Incidencies_YYYYMMDD: '20190528',
 	};
+	for (var i in subscriptions) {
+		if (subscriptions.hasOwnProperty(i)) {
+			var s = subscriptions[i];
+			axios.post(url, data, options).then((response) => {
+				// handle success
+				s.respond({
+					returnValue: true,
+					stopid,
+					description: response.data.description,
+					data: response.data.data[0].Arrive,
+					lineasParada: response.data.data[1].StopLines,
+					datetime: response.data.datetime,
+				});
+			})
+			.catch((error) => {
+				// handle error
+				s.respond({
+					returnValue: false,
+					message: 'Problema al conseguir los datos de ',
+					stopid,
+					error,
+				});
+			});
+		}
+	}
+}
 
-	
-	axios.post(url, data, options).then((response) => {
-		// handle success
-		message.respond({
-			returnValue: true,
-			stopid,
-			description: response.data.description,
-			data: response.data.data[0].Arrive,
-			lineasParada: response.data.data[1].StopLines,
-			datetime: response.data.datetime,
-			
-		});
-	})
-	.catch((error) => {
-		// handle error
-		message.respond({
-			returnValue: false,
-			message: 'Problema al conseguir los datos de ',
-			stopid,
-			error,
-		});
-	});
+arrivalBus.on('request', (message) => {
+
+	if (message.isSubscription) {
+		subscriptions[message.uniqueToken] = message;
+		if (!interval) {
+			createInterval(message);
+		}
+	}
 }); 
+
+arrivalBus.on("cancel", function(message) {
+	console.log("Canceled " + message.uniqueToken);
+	delete subscriptions[message.uniqueToken];
+	var keys = Object.keys(subscriptions);
+	if (keys.length === 0) {
+		console.log("no more subscriptions, canceling interval");
+		clearInterval(interval);
+		interval = undefined;
+	}
+});
