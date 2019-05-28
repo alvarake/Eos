@@ -22,8 +22,8 @@ const BusSettingsPanel = kind({
 				<Header title={title} titleBelow="Configurando la parada de bus.">
 					<Button onClick={onClick}>Atras</Button>
 				</Header>
-				Introduce el numero de parada de autobus sobre el que quieres información
-				<Input placeholder="Enter STOP id" onChange={onSettings} />
+				Introduce el número de la parada del autobús sobre el que quieres información.
+				<Input placeholder="IDde la parada del bus" onChange={onSettings} />
 			</Panel>
 		);
 	},

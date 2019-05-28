@@ -29,7 +29,7 @@ const Bienvenida = kind({
 				</BodyText>
 				<BodyText>
 		Recuerda:
-		¡A quién madruga EOS ayuda!
+		¡A quién madruga eOS ayuda!
 				</BodyText>
 			</Scroller>
 		</Panel>
