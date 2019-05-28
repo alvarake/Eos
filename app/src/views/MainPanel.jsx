@@ -9,6 +9,7 @@ const MainPanel = kind({
 	name: 'MainPanel',
 
 	propTypes: {
+		bus: PropTypes.object,
 		next: PropTypes.string,
 		onClick: PropTypes.func,
 		title: PropTypes.string,
@@ -16,6 +17,7 @@ const MainPanel = kind({
 
 	handlers: {
 		tiempoBus: (ev, { bus }) => {
+			console.log("alvaroesuncojo")
 			console.log(bus);
 			timeToArrive(bus);
 		},

@@ -45,6 +45,7 @@ export const timeToArrive = ({ stopid, accessToken }) => {
 		service: 'luna://eos.busservice',
 		method: 'arrivalbus',
 		parameters: { stopid, accessToken },
+		subscribe: true,
 		onSuccess: (res) => {
 			//dispatch(setTimeStampArrivalBus(res.datetime))
 			console.log(res.data);
