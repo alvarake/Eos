@@ -44,7 +44,7 @@ const App = kind({
 	},
 
 	// eslint-disable-next-line
-	render: ({ music, onAlarmSettings, onBusSettings, onHomePanel, onMusicSettings, onNavigate, onSettingsPanel, path, alarm, ...rest }) => {
+	render: ({ bus, music, onAlarmSettings, onBusSettings, onHomePanel, onMusicSettings, onNavigate, onSettingsPanel, path, alarm, ...rest }) => {
 		return (
 			<RoutablePanels {...rest} arranger={SlideLeftArranger} onBack={onNavigate} path={path}>
 				<Route path="welcome" component={Bienvenida} title="¡Buenos días!" onClick={onSettingsPanel}>
@@ -52,7 +52,7 @@ const App = kind({
 					<Route path="settings" component={SettingsPanel} title="Configuración" arrayItems={items} onClick={onHomePanel} onNavigate={onNavigate}>
 						<Route path="music" component={MusicSettingsPanel} title="Música" onClick={onSettingsPanel} onSettings={onMusicSettings} music={music} />
 						<Route path="alarm" component={AlarmSettingsPanel} title="Alarma" onClick={onSettingsPanel} onSettings={onAlarmSettings} />
-						<Route path="route" component={BusSettingsPanel} title="Parada de Bus" onClick={onSettingsPanel} onSettings={onBusSettings} />
+						<Route path="route" component={BusSettingsPanel} title="Parada de Bus" onClick={onSettingsPanel} onSettings={onBusSettings} bus={bus} />
 						<Route path="weather" component={PorHacerSettingsPanel} title="Tiempo Atmosférico" onClick={onSettingsPanel} />
 						<Route path="news" component={PorHacerSettingsPanel} title="Noticias" onClick={onSettingsPanel} />
 					</Route>
