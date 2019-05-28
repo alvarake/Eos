@@ -68,6 +68,7 @@ service.register('arrivalbus', (message) => {
 		Text_IncidencesRequired_YN: 'Y',
 		DateTime_Referenced_Incidencies_YYYYMMDD: '20190528',
 	};
+
 	
 	axios.post(url, data, options).then((response) => {
 		// handle success
@@ -77,6 +78,7 @@ service.register('arrivalbus', (message) => {
 			description: response.data.description,
 			data: response.data.data[0].Arrive,
 			lineasParada: response.data.data[1].StopLines,
+			datetime: response.data.datetime,
 			
 		});
 	})

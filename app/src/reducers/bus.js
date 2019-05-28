@@ -15,6 +15,11 @@ function bus(state = initialState, action) {
 			...state,
 			accessToken: action.accessToken,
 		};
+	case 'SET_LAST_TIMESTAMP_ARRIVAL_BUS':
+		return {
+			...state,
+			timestamp: action.timestamp,
+		};
 	default:
 		return state;
 	}

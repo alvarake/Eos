@@ -14,6 +14,13 @@ const setEMTAccessToken = (accessToken) => {
 	};
 };
 
+const setTimeStampArrivalBus = (timestamp) => {
+	return {
+		type: 'SET_LAST_TIMESTAMP_ARRIVAL_BUS',
+		timestamp,
+	};
+};
+
 export const loadStopInfo = ({ stopid, accessToken }) => (dispatch) => {
 	console.log('En loadStopInfo');
 	return new LS2Request().send({
@@ -39,6 +46,7 @@ export const timeToArrive = ({ stopid, accessToken }) => {
 		method: 'arrivalbus',
 		parameters: { stopid, accessToken },
 		onSuccess: (res) => {
+			//dispatch(setTimeStampArrivalBus(res.datetime))
 			console.log(res.data);
 		},
 		onFailure: (res) => {
