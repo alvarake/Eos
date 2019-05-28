@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import navigate from '../actions/RouterActions';
 import { unloadMedia, loadMedia } from '../actions/MusicActions';
 import { calculateDeviceTime } from '../actions/AlarmActions';
-import { loginEMT, loadStopInfo } from '../actions/BusActions';
+import { loadStopInfo } from '../actions/BusActions';
 
 
 const mapStateToProps = (state) => {
@@ -31,12 +31,7 @@ const mapDispatchToProps = dispatch => ({
 	onMusicSettings: music => (music.mediaid ? dispatch(unloadMedia(music.mediaid)) : dispatch(loadMedia())),
 	onAlarmSettings: alarmConfig => dispatch(calculateDeviceTime(alarmConfig)),
 	onBusSettings: (busConfig) => {
-		console.log(busConfig);
-		if (!busConfig.bus.accessToken) {
-			dispatch(loginEMT());
-		}
 		const newBusConfig = { stopid: busConfig.newStopId, accessToken: busConfig.bus.accessToken };
-		console.log(newBusConfig);
 		dispatch(loadStopInfo(newBusConfig));
 	},
 });
