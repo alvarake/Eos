@@ -30,7 +30,6 @@ service.register('stopdetail', (message) => {
 	nextStep.then(accessToken => {
 		const url = `https://openapi.emtmadrid.es/v1/transport/busemtmad/stops/${stopid}/detail/`;
 		const options = { headers: { accessToken } };
-		
 		axios.get(url, options).then((response) => {
 			// handle success
 			message.respond({
@@ -44,6 +43,7 @@ service.register('stopdetail', (message) => {
 			// handle error
 			message.respond({
 				returnValue: false,
+				message: 'Se rompe en STOPDETIL',
 				stopid,
 				error,
 			});
@@ -54,6 +54,7 @@ service.register('stopdetail', (message) => {
 const arrivalBus = service.register("arrivalbus");
 let interval;
 let subscriptions = {};
+
 function createInterval(message) {
 	if (interval) {
 		return;
@@ -61,7 +62,7 @@ function createInterval(message) {
 	console.log("create new interval");
 	interval = setInterval(function() {
 		sendResponses(message);
-	}, 10000);
+	}, 60000);
 }
 
 function sendResponses(message) {
@@ -79,7 +80,7 @@ function sendResponses(message) {
 		Text_StopRequired_YN: 'Y',
 		Text_EstimationsRequired_YN: 'Y',
 		Text_IncidencesRequired_YN: 'Y',
-		DateTime_Referenced_Incidencies_YYYYMMDD: '20190528',
+		DateTime_Referenced_Incidencies_YYYYMMDD: '20190529',
 	};
 	for (var i in subscriptions) {
 		if (subscriptions.hasOwnProperty(i)) {
@@ -101,7 +102,7 @@ function sendResponses(message) {
 				// handle error
 				s.respond({
 					returnValue: false,
-					message: 'Problema al conseguir los datos de ',
+					message: 'Se rompe en arrivalBUS',
 					stopid,
 					error,
 				});
