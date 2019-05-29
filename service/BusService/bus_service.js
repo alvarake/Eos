@@ -61,7 +61,7 @@ function createInterval(message) {
 	console.log("create new interval");
 	interval = setInterval(function() {
 		sendResponses(message);
-	}, 5000);
+	}, 10000);
 }
 
 function sendResponses(message) {
@@ -90,9 +90,11 @@ function sendResponses(message) {
 					returnValue: true,
 					stopid,
 					description: response.data.description,
-					data: response.data.data[0].Arrive,
-					lineasParada: response.data.data[1].StopLines,
+					Arrive: response.data.data[0].Arrive,
+					StopLines: response.data.data[1].StopLines,
+					nombreParada: response.data.data[1].Description,
 					datetime: response.data.datetime,
+					
 				});
 			})
 			.catch((error) => {
