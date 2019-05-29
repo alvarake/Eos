@@ -48,7 +48,14 @@ export const timeToArrive = ({ stopid, accessToken }) => {
 		subscribe: true,
 		onSuccess: (res) => {
 			//dispatch(setTimeStampArrivalBus(res.datetime))
-			console.log(res.data);
+			console.log('----------------------------------');
+			console.log(`Nombre de la parada ${stopid}: ${res.nombreParada}`);
+			console.log('Lineas de esta parada:');
+			console.log(res.StopLines.Data);
+			console.log('*************');
+			console.log('Las llegadas son:');
+			console.log(res.Arrive);
+			console.log('*************');
 		},
 		onFailure: (res) => {
 			console.log(res);

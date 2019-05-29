@@ -17,8 +17,6 @@ const MainPanel = kind({
 
 	handlers: {
 		tiempoBus: (ev, { bus }) => {
-			console.log("alvaroesuncojo")
-			console.log(bus);
 			timeToArrive(bus);
 		},
 	},
