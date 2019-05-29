@@ -1,6 +1,7 @@
 const initialState = {
 	stopid: '',
 	accessToken: '',
+	arrivals: '',
 };
 
 function bus(state = initialState, action) {
@@ -15,10 +16,10 @@ function bus(state = initialState, action) {
 			...state,
 			accessToken: action.accessToken,
 		};
-	case 'SET_LAST_TIMESTAMP_ARRIVAL_BUS':
+	case 'SET_ARRIVALS_INFO':
 		return {
 			...state,
-			timestamp: action.timestamp,
+			arrivals: action.arrivals,
 		};
 	default:
 		return state;

@@ -4,7 +4,6 @@ import { unloadMedia, loadMedia } from '../actions/MusicActions';
 import { calculateDeviceTime } from '../actions/AlarmActions';
 import { loadStopInfo } from '../actions/BusActions';
 
-
 const mapStateToProps = (state) => {
 	console.log(state);
 	return {
@@ -19,6 +18,7 @@ const mapStateToProps = (state) => {
 		bus: {
 			accessToken: state.bus.accessToken,
 			stopid: state.bus.stopid,
+			arrivals: state.bus.arrivals,
 		},
 	};
 };
