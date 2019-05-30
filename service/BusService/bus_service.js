@@ -62,7 +62,7 @@ function createInterval(message) {
 	console.log("create new interval");
 	interval = setInterval(function() {
 		sendResponses(message);
-	}, 60000);
+	}, 20000);
 }
 
 function sendResponses(message) {
@@ -86,13 +86,17 @@ function sendResponses(message) {
 		if (subscriptions.hasOwnProperty(i)) {
 			var s = subscriptions[i];
 			axios.post(url, data, options).then((response) => {
+				let StopLines = response.data.data[1].StopLines.Data;
+				if (typeof StopLines === 'object') {
+					StopLines = new Array(StopLines);
+				}
 				// handle success
 				s.respond({
 					returnValue: true,
 					stopid,
 					description: response.data.description,
 					Arrive: response.data.data[0].Arrive,
-					StopLines: response.data.data[1].StopLines,
+					StopLines,
 					nombreParada: response.data.data[1].Description,
 					datetime: response.data.datetime,
 					
