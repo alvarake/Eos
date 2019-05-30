@@ -2,6 +2,7 @@ const initialState = {
 	stopid: '',
 	accessToken: '',
 	arrivals: '',
+	lastArrivalsRequest: undefined,
 };
 
 function bus(state = initialState, action) {
@@ -20,6 +21,11 @@ function bus(state = initialState, action) {
 		return {
 			...state,
 			arrivals: action.arrivals,
+		};
+	case 'SET_LAST_BUS_REQUEST':
+		return {
+			...state,
+			lastArrivalsRequest: action.lastArrivalsRequest,
 		};
 	default:
 		return state;

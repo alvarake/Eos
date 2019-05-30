@@ -3,34 +3,31 @@ import { Header, Panel } from '@enact/moonstone/Panels';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { timeToArrive } from '../actions/BusActions';
+
+import Scroller from '@enact/ui/Scroller';
+
+import BusArrival from '../components/BusArrivals/BusArrival';
 
 const MainPanel = kind({
 	name: 'MainPanel',
 
 	propTypes: {
 		bus: PropTypes.object,
-		next: PropTypes.string,
 		onClick: PropTypes.func,
 		title: PropTypes.string,
 	},
 
-	handlers: {
-		tiempoBus: (ev, { bus }) => {
-			timeToArrive(bus);
-		},
-	},
-
 	// eslint-disable-next-line
-	render: ({ tiempoBus, title, onClick,  ...rest }) => {
+	render: ({ title, onClick, bus,  ...rest }) => {
 		delete rest.next;
 		return (
 			<Panel {...rest}>
 				<Header title={title} titleBelow="Pantalla Principal">
 					<Button onClick={onClick}>Configuración</Button>
 				</Header>
-
-				<Button onClick={tiempoBus}>TiempoBUS</Button>
+				<Scroller>
+					<BusArrival bus={bus} />
+				</Scroller>
 			</Panel>
 		);
 	},

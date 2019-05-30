@@ -1,8 +1,9 @@
+/* eslint-disable max-len */
 import { connect } from 'react-redux';
 import navigate from '../actions/RouterActions';
 import { unloadMedia, loadMedia } from '../actions/MusicActions';
 import { calculateDeviceTime } from '../actions/AlarmActions';
-import { loadStopInfo } from '../actions/BusActions';
+import { loadStopInfo, timeToArrive } from '../actions/BusActions';
 
 const mapStateToProps = (state) => {
 	console.log(state);
@@ -19,6 +20,7 @@ const mapStateToProps = (state) => {
 			accessToken: state.bus.accessToken,
 			stopid: state.bus.stopid,
 			arrivals: state.bus.arrivals,
+			lastArrivalsRequest: state.bus.lastArrivalsRequest,
 		},
 	};
 };
@@ -27,13 +29,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => ({
 	onNavigate: ({ path }) => (dispatch(navigate(path))),
-	// eslint-disable-next-line max-len
 	onMusicSettings: music => (music.mediaid ? dispatch(unloadMedia(music.mediaid)) : dispatch(loadMedia())),
 	onAlarmSettings: alarmConfig => dispatch(calculateDeviceTime(alarmConfig)),
-	onBusSettings: (busConfig) => {
-		const newBusConfig = { stopid: busConfig.newStopId, accessToken: busConfig.bus.accessToken };
-		dispatch(loadStopInfo(newBusConfig));
-	},
+	onBusSettings: busConfig => (dispatch(loadStopInfo({ stopid: busConfig.newStopId, accessToken: busConfig.bus.accessToken }))),
+	onBusRequest: busConfig => (dispatch(timeToArrive(busConfig))),
 });
 
 const AppStateDecorator = connect(mapStateToProps, mapDispatchToProps);
