@@ -3,10 +3,11 @@ import { Header, Panel } from '@enact/moonstone/Panels';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
-
+import Spinner from '@enact/moonstone/Spinner';
 import Scroller from '@enact/ui/Scroller';
 
 import BusArrival from '../components/BusArrivals/BusArrival';
+
 
 const MainPanel = kind({
 	name: 'MainPanel',
@@ -19,6 +20,13 @@ const MainPanel = kind({
 
 	// eslint-disable-next-line
 	render: ({ title, onClick, bus,  ...rest }) => {
+		const cargandoAutobuses = () => {
+			if (!bus.arrivals) {
+				return (<Spinner>Cargando...</Spinner>);
+			}
+			return (<BusArrival bus={bus} />);
+		};
+
 		delete rest.next;
 		return (
 			<Panel {...rest}>
@@ -26,7 +34,7 @@ const MainPanel = kind({
 					<Button onClick={onClick}>Configuración</Button>
 				</Header>
 				<Scroller>
-					<BusArrival bus={bus} />
+					{((bus.stopid) ? cargandoAutobuses() : <h1>Tienes que configurar una parada de bus.</h1>)}
 				</Scroller>
 			</Panel>
 		);
@@ -34,3 +42,4 @@ const MainPanel = kind({
 });
 
 export default MainPanel;
+

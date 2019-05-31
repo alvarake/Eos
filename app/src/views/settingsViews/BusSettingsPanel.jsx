@@ -4,7 +4,9 @@ import { Header, Panel } from '@enact/moonstone/Panels';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
-import BusStops from '../../components/BusStops/BusStops'
+import Spinner from '@enact/moonstone/Spinner';
+import Divider from '@enact/moonstone/Divider';
+import BusStops from '../../components/BusStops/BusStops';
 
 const BusSettingsPanel = kind({
 	name: 'BusSettingsPanel',
@@ -21,15 +23,32 @@ const BusSettingsPanel = kind({
 	render: ({ bus, title, onClick, onRequest, onSettings, ...rest }) => {
 		delete rest.next;
 
+		const loanding = (<Spinner>Cargando...</Spinner>);
+		const busLines = (<BusStops bus={bus} />);
+		const cargandoAutobuses = () => {
+			if (bus.stopid) {
+				if (!bus.stopsInfo) {
+					return loanding;
+				}
+				return busLines;
+			}
+			return (<h1>Tienes que configurar una parada de autobus.</h1>);
+		};
+
+
 		return (
 			<Panel {...rest}>
+
 				<Header title={title} titleBelow="Configurando la parada de bus.">
 					<Button onClick={onClick}>Atras</Button>
 				</Header>
-				Introduce el número de la parada del autobús sobre el que quieres información.
+
 				<Input placeholder="ID de la parada del bus" onChange={onSettings} />
-				{bus.stopid ? <Button onClick={onRequest}>{bus.stopid}</Button> : null}
-				<BusStops bus={bus} />
+				<Button onClick={onRequest}>Guardar</Button>
+
+				<Divider casing="preserve" spacing="medium">
+					{cargandoAutobuses()}
+				</Divider>
 			</Panel>
 		);
 	},
