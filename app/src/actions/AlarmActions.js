@@ -35,11 +35,15 @@ const calculateTimeToAlert = (deviceTime, alarmTime) => {
 
 const setDeviceAlarm = params => (dispatch) => {
 	console.log('Entramos en setDeviceAlarm');
+	console.log('params');
+	console.log(params);
 
 	const deviceTime = `${params.res.localtime.hour}:${params.res.localtime.minute}`;
+	console.log('deviceTime');
+	console.log(deviceTime);
 	dispatch(setAlarmTimesStamp(deviceTime));
 
-	const timeToAlert = calculateTimeToAlert(params.res.localtime, params.alarmConfig.ev);
+	const timeToAlert = calculateTimeToAlert(params.res.localtime, params.alarmConfig.tiempobus);
 	let a = '';
 	let b = '';
 	const mediaId = params.alarmConfig.music.mediaid;
@@ -99,7 +103,7 @@ const setDeviceAlarm = params => (dispatch) => {
 
 export const calculateDeviceTime = alarmConfig => (dispatch) => {
 	console.log('Entramos en calculateDeviceTime');
-	dispatch(setAlarm(alarmConfig.ev));
+	dispatch(setAlarm(alarmConfig.tiempo));
 
 	return new LS2Request().send({
 		service: 'luna://com.webos.service.systemservice',

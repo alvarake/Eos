@@ -89,7 +89,7 @@ function sendResponses(message) {
 			var s = subscriptions[i];
 			axios.post(url, data, options).then((response) => {
 				let StopLines = response.data.data[1].StopLines.Data;
-				if (typeof StopLines === 'object') {
+				if (!Array.isArray(StopLines)) {
 					StopLines = new Array(StopLines);
 				}
 				// handle success

@@ -25,15 +25,15 @@ const BusArrival = kind({
 						}
 						return '/ +20 mins /';
 					}
+					return '';
 				})}
 			</li>
 		));
-
 		// eslint-disable-next-line no-param-reassign
 		return (
 			<div {...rest}>
 				<h1>{bus.arrivals ? bus.arrivals.nombreParada : 'Tienes que configurar una parada'}</h1>
-				<ul>{bus.arrivals ? listadeParadas : 'Se esta cargando los datos del bus'}</ul>
+				<ul>{bus.arrivals ? listadeParadas : ''}</ul>
 			</div>
 		);
 	},
