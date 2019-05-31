@@ -4,6 +4,7 @@ import { Header, Panel } from '@enact/moonstone/Panels';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
+import BusStops from '../../components/BusStops/BusStops'
 
 const BusSettingsPanel = kind({
 	name: 'BusSettingsPanel',
@@ -28,6 +29,7 @@ const BusSettingsPanel = kind({
 				Introduce el número de la parada del autobús sobre el que quieres información.
 				<Input placeholder="ID de la parada del bus" onChange={onSettings} />
 				{bus.stopid ? <Button onClick={onRequest}>{bus.stopid}</Button> : null}
+				<BusStops bus={bus} />
 			</Panel>
 		);
 	},

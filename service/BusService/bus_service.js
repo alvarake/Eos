@@ -31,11 +31,13 @@ service.register('stopdetail', (message) => {
 		const url = `https://openapi.emtmadrid.es/v1/transport/busemtmad/stops/${stopid}/detail/`;
 		const options = { headers: { accessToken } };
 		axios.get(url, options).then((response) => {
+
+			let stopsInfo = response.data.data[0].stops[0];
 			// handle success
 			message.respond({
 				returnValue: true,
 				description: response.data.description,
-				data: response.data.data[0].stops[0],
+				stopsInfo, 
 				accessToken,
 			});
 		})
