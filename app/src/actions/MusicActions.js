@@ -69,7 +69,7 @@ export const loadMedia = () => (dispatch) => {
 		service: 'luna://com.webos.media',
 		method: 'load',
 		parameters: {
-			uri: 'https://media.w3.org/2010/07/bunny/04-Death_Becomes_Fur.mp3',
+			uri: 'http://se-sycdn.kuwo.cn/resource/n3/67/24/286388541.mp3',
 			type: 'media',
 			payload: {
 				option: {

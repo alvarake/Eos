@@ -43,7 +43,7 @@ const setDeviceAlarm = params => (dispatch) => {
 	console.log(deviceTime);
 	dispatch(setAlarmTimesStamp(deviceTime));
 
-	const timeToAlert = calculateTimeToAlert(params.res.localtime, params.alarmConfig.tiempobus);
+	const timeToAlert = calculateTimeToAlert(params.res.localtime, params.alarmConfig.tiempo);
 	let a = '';
 	let b = '';
 	const mediaId = params.alarmConfig.music.mediaid;
