@@ -21,6 +21,7 @@ const mapStateToProps = (state) => {
 			stopid: state.bus.stopid,
 			arrivals: state.bus.arrivals,
 			lastArrivalsRequest: state.bus.lastArrivalsRequest,
+			stopsInfo: state.bus.stopsInfo,
 		},
 	};
 };

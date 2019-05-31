@@ -27,6 +27,16 @@ const setLastBusRequest = (lastArrivalsRequest) => {
 		lastArrivalsRequest,
 	};
 };
+
+const setStopsInfo = (stopsInfo) => {
+	console.log('En stopsInfo');
+	return {
+		type: 'SET_STOPS_INFO',
+		stopsInfo,
+	};
+};
+
+
 export const timeToArrive = ({ stopid, accessToken, lastArrivalsRequest }) => (dispatch) => {
 	if (lastArrivalsRequest) {
 		lastArrivalsRequest.cancel();
@@ -38,7 +48,6 @@ export const timeToArrive = ({ stopid, accessToken, lastArrivalsRequest }) => (d
 		parameters: { stopid, accessToken },
 		subscribe: true,
 		onSuccess: (res) => {
-			console.log(res);
 			dispatch(setArrivalsInfo(res));
 		},
 		onFailure: (res) => {
@@ -47,7 +56,6 @@ export const timeToArrive = ({ stopid, accessToken, lastArrivalsRequest }) => (d
 		},
 	});
 	dispatch(setLastBusRequest(ArrivalsRequest));
-
 	return ArrivalsRequest;
 };
 
@@ -59,8 +67,8 @@ export const loadStopInfo = ({ stopid, accessToken }) => (dispatch) => {
 		method: 'stopdetail',
 		parameters: { stopid, accessToken },
 		onSuccess: (res) => {
-			console.log(res.data);
 			dispatch(setEMTAccessToken(res.accessToken));
+			dispatch(setStopsInfo(res.stopsInfo));
 		},
 		onFailure: (res) => {
 			console.log(res);
