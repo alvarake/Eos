@@ -1,7 +1,6 @@
 const initialState = {
 	alarms: [],
 	possibleAlarms: [],
-	alarmtimestamp: '',
 };
 
 function alarm(state = initialState, action) {
@@ -27,12 +26,7 @@ function alarm(state = initialState, action) {
 	case 'DELETE_ALARM_TIME':
 		return {
 			...state,
-			alarmtime: state.alarms.filter(alarmItem => alarmItem !== action.alarmtime),
-		};
-	case 'TIME_ALARM_WAS_CREATED':
-		return {
-			...state,
-			alarmtimestamp: action.alarmtimestamp,
+			alarms: state.alarms.filter(alarmItem => alarmItem !== action.keyAlarm),
 		};
 	default:
 		return state;
