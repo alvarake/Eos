@@ -1,5 +1,6 @@
 const initialState = {
 	mediaid: '',
+	cancion: 0,
 };
 
 function music(state = initialState, action) {
@@ -8,6 +9,11 @@ function music(state = initialState, action) {
 		return {
 			...state,
 			mediaid: action.mediaid,
+		};
+	case 'SET_SONG':
+		return {
+			...state,
+			cancion: action.cancion,
 		};
 	default:
 		return state;

@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import { connect } from 'react-redux';
 import navigate from '../actions/RouterActions';
-import { unloadMedia, loadMedia } from '../actions/MusicActions';
+import { unloadMedia, loadMedia, setSong } from '../actions/MusicActions';
 import { calculateDeviceTime, addPossibleAlarm, deleteOneAlarm } from '../actions/AlarmActions';
 import { loadStopInfo, timeToArrive } from '../actions/BusActions';
 
@@ -11,6 +11,7 @@ const mapStateToProps = (state) => {
 		path: state.path,
 		music: {
 			mediaid: state.music.mediaid,
+			cancion: state.music.cancion,
 		},
 		alarm: {
 			alarms: state.alarm.alarms,
@@ -28,7 +29,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => ({
 	onNavigate: ({ path }) => (dispatch(navigate(path))),
-	onMusicSettings: music => (music.mediaid ? dispatch(unloadMedia(music.mediaid)) : dispatch(loadMedia())),
+	onMusicSettings: music => (music.mediaid ? dispatch(unloadMedia(music.mediaid)) : dispatch(loadMedia(music))),
+	onMusicSelected: music => dispatch(setSong(music)),
 
 	onAlarmSettings: possibleAlarm => dispatch(addPossibleAlarm(possibleAlarm)),
 	onAlarmRequest: alarmConfig => dispatch(calculateDeviceTime(alarmConfig)),

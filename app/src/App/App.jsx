@@ -33,6 +33,7 @@ const App = kind({
 		onBusRequest: PropTypes.func,
 
 		onMusicSettings: PropTypes.func,
+		onMusicSelected: PropTypes.func,
 		onNavigate: PropTypes.func,
 
 		path: PropTypes.string,
@@ -42,6 +43,7 @@ const App = kind({
 		onSettingsPanel: (ev, { onNavigate }) => onNavigate({ path: '/welcome/settings' }),
 		onHomePanel: (ev, { onNavigate }) => onNavigate({ path: '/welcome/home' }),
 		onMusicSettings: (ev, { music, onMusicSettings }) => onMusicSettings(music),
+		onMusicSelected: (ev, { onMusicSelected }) => onMusicSelected(ev.value),
 		onAlarmSettings: (ev, { onAlarmSettings }) => {
 			const tiempo = `${ev.value.getHours()}:${ev.value.getMinutes()}`;
 			onAlarmSettings(tiempo);
@@ -53,13 +55,13 @@ const App = kind({
 	},
 
 	// eslint-disable-next-line
-	render: ({ bus, music, onAlarmRequest, onAlarmDeleteRequest, onAlarmSettings, onBusRequest, onBusSettings, onHomePanel, onMusicSettings, onNavigate, onSettingsPanel, path, alarm, ...rest }) => {
+	render: ({ bus, music, onAlarmRequest, onAlarmDeleteRequest, onAlarmSettings, onBusRequest, onBusSettings, onHomePanel, onMusicSettings, onMusicSelected, onNavigate, onSettingsPanel, path, alarm, ...rest }) => {
 		return (
 			<RoutablePanels {...rest} arranger={SlideLeftArranger} onBack={onNavigate} path={path}>
 				<Route path="welcome" component={Bienvenida} title="¡Buenos días!" onClick={onSettingsPanel}>
 					<Route path="home" component={MainPanel} title="Home" onClick={onSettingsPanel} bus={bus} />
 					<Route path="settings" component={SettingsPanel} title="Configuración" arrayItems={items} onClick={onHomePanel} onNavigate={onNavigate}>
-						<Route path="music" component={MusicSettingsPanel} title="Música" onClick={onSettingsPanel} onSettings={onMusicSettings} music={music} />
+						<Route path="music" component={MusicSettingsPanel} title="Música" onClick={onSettingsPanel} onSettings={onMusicSettings} onSelect={onMusicSelected} music={music} />
 						<Route path="alarm" component={AlarmSettingsPanel} title="Alarma" onClick={onSettingsPanel} onSettings={onAlarmSettings} onDeleteAlarm={onAlarmDeleteRequest} onRequest={onAlarmRequest} alarm={alarm} />
 						<Route path="route" component={BusSettingsPanel} title="Parada de Bus" onClick={onSettingsPanel} onSettings={onBusSettings} onRequest={onBusRequest} bus={bus} />
 						<Route path="weather" component={PorHacerSettingsPanel} title="Tiempo Atmosférico" onClick={onSettingsPanel} />
