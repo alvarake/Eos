@@ -5,15 +5,11 @@ const setAlarm = alarmtime => ({
 	alarmtime,
 });
 
-const setAlarmTimesStamp = alarmtimestamp => ({
-	type: 'TIME_ALARM_WAS_CREATED',
-	alarmtimestamp,
+const deleteAlarm = keyAlarm => ({
+	type: 'DELETE_ALARM_TIME',
+	keyAlarm,
 });
 
-const deleteAlarm = alarmtime => ({
-	type: 'DELETE_ALARM_TIME',
-	alarmtime,
-});
 
 export const addPossibleAlarm = possibleAlarm => ({
 	type: 'POSSIBLE_ALARM_WAS_SELECTED',
@@ -46,9 +42,6 @@ const calculateTimeToAlert = (deviceTime, alarmTime) => {
 
 const setDeviceAlarm = params => (dispatch) => {
 	console.log('Entramos en setDeviceAlarm');
-	const deviceTime = `${params.res.localtime.hour}:${params.res.localtime.minute}`;
-	dispatch(setAlarmTimesStamp(deviceTime));
-
 	const timeToAlert = calculateTimeToAlert(params.res.localtime, params.alarmSelected);
 	let a = '';
 	let b = '';
@@ -93,6 +86,7 @@ const setDeviceAlarm = params => (dispatch) => {
 			},
 			onSuccess: (res) => {
 				console.log('Se ha creado el MUSIC_ALERT');
+				dispatch(setAlarm(params.alarmSelected));
 				console.log(res);
 			},
 			onFailure: (res) => {
@@ -109,11 +103,7 @@ const setDeviceAlarm = params => (dispatch) => {
 
 export const calculateDeviceTime = alarmConfig => (dispatch) => {
 	console.log('Entramos en calculateDeviceTime');
-	console.log(alarmConfig);
-
 	const alarmSelected = alarmConfig.alarm.possibleAlarms.pop();
-	dispatch(setAlarm(alarmSelected));
-
 	return new LS2Request().send({
 		service: 'luna://com.webos.service.systemservice',
 		method: 'time/getSystemTime',
@@ -125,6 +115,45 @@ export const calculateDeviceTime = alarmConfig => (dispatch) => {
 			console.log(res);
 		},
 	});
+};
+
+export const deleteOneAlarm = keyAlarm => (dispatch) => {
+	console.log('Entramos en deletaAlarm');
+
+	const a = new LS2Request().send({
+		service: 'luna://com.webos.service.alarm',
+		method: 'clear',
+		parameters: {
+			key: `${keyAlarm} Toast`,
+		},
+		onSuccess: (res) => {
+			console.log('Se ha eliminado el TOAST_ALERT');
+			console.log(res);
+			dispatch(deleteAlarm(keyAlarm));
+		},
+		onFailure: (res) => {
+			console.log('Se ha FALLADO al eliminar el TOAST_ALERT');
+			console.log(res);
+		},
+	});
+
+	const b = new LS2Request().send({
+		service: 'luna://com.webos.service.alarm',
+		method: 'clear',
+		parameters: {
+			key: `${keyAlarm} Music`,
+		},
+		onSuccess: (res) => {
+			console.log('Se ha eliminado el MUSIC_ALERT');
+			console.log(res);
+		},
+		onFailure: (res) => {
+			console.log('Se ha FALLADO al eliminar el MUSIC_ALERT');
+			console.log(res);
+		},
+	});
+
+	return { a, b };
 };
 
 

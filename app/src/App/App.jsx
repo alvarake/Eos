@@ -20,17 +20,21 @@ import items from '../components/ItemConfigurable/items';
 const RoutablePanels = Routable({ navigate: 'onBack' }, Panels);
 const App = kind({
 	name: 'App',
-
 	propTypes: {
 		alarm: PropTypes.object,
 		bus: PropTypes.object,
 		music: PropTypes.object,
+
 		onAlarmRequest: PropTypes.func,
+		onAlarmDeleteRequest: PropTypes.func,
 		onAlarmSettings: PropTypes.func,
+
 		onBusSettings: PropTypes.func,
 		onBusRequest: PropTypes.func,
+
 		onMusicSettings: PropTypes.func,
 		onNavigate: PropTypes.func,
+
 		path: PropTypes.string,
 	},
 
@@ -43,19 +47,20 @@ const App = kind({
 			onAlarmSettings(tiempo);
 		},
 		onAlarmRequest: (ev, { music, alarm, onAlarmRequest }) => onAlarmRequest({ music, alarm }),
+		onAlarmDeleteRequest: (ev, { onAlarmDeleteRequest }) => onAlarmDeleteRequest(ev),
 		onBusSettings: (ev, { bus, onBusSettings }) => onBusSettings({ newStopId: ev.value, bus }),
 		onBusRequest: (ev, { bus, onBusRequest }) => onBusRequest(bus),
 	},
 
 	// eslint-disable-next-line
-	render: ({ bus, music, onAlarmRequest, onAlarmSettings, onBusRequest, onBusSettings, onHomePanel, onMusicSettings, onNavigate, onSettingsPanel, path, alarm, ...rest }) => {
+	render: ({ bus, music, onAlarmRequest, onAlarmDeleteRequest, onAlarmSettings, onBusRequest, onBusSettings, onHomePanel, onMusicSettings, onNavigate, onSettingsPanel, path, alarm, ...rest }) => {
 		return (
 			<RoutablePanels {...rest} arranger={SlideLeftArranger} onBack={onNavigate} path={path}>
 				<Route path="welcome" component={Bienvenida} title="¡Buenos días!" onClick={onSettingsPanel}>
 					<Route path="home" component={MainPanel} title="Home" onClick={onSettingsPanel} bus={bus} />
 					<Route path="settings" component={SettingsPanel} title="Configuración" arrayItems={items} onClick={onHomePanel} onNavigate={onNavigate}>
 						<Route path="music" component={MusicSettingsPanel} title="Música" onClick={onSettingsPanel} onSettings={onMusicSettings} music={music} />
-						<Route path="alarm" component={AlarmSettingsPanel} title="Alarma" onClick={onSettingsPanel} onSettings={onAlarmSettings} onRequest={onAlarmRequest}/>
+						<Route path="alarm" component={AlarmSettingsPanel} title="Alarma" onClick={onSettingsPanel} onSettings={onAlarmSettings} onDeleteAlarm={onAlarmDeleteRequest} onRequest={onAlarmRequest} alarm={alarm} />
 						<Route path="route" component={BusSettingsPanel} title="Parada de Bus" onClick={onSettingsPanel} onSettings={onBusSettings} onRequest={onBusRequest} bus={bus} />
 						<Route path="weather" component={PorHacerSettingsPanel} title="Tiempo Atmosférico" onClick={onSettingsPanel} />
 						<Route path="news" component={PorHacerSettingsPanel} title="Noticias" onClick={onSettingsPanel} />
