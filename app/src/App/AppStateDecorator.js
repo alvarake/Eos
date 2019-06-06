@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 import navigate from '../actions/RouterActions';
 import { unloadMedia, loadMedia } from '../actions/MusicActions';
-import { calculateDeviceTime } from '../actions/AlarmActions';
+import { calculateDeviceTime, addPossibleAlarm } from '../actions/AlarmActions';
 import { loadStopInfo, timeToArrive } from '../actions/BusActions';
 
 const mapStateToProps = (state) => {
@@ -13,8 +13,9 @@ const mapStateToProps = (state) => {
 			mediaid: state.music.mediaid,
 		},
 		alarm: {
-			alarmtime: state.alarm.time,
+			alarms: state.alarm.alarms,
 			alarmtimestamp: state.alarm.alarmtimestamp,
+			possibleAlarms: state.alarm.possibleAlarms,
 		},
 		bus: {
 			accessToken: state.bus.accessToken,
@@ -31,7 +32,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => ({
 	onNavigate: ({ path }) => (dispatch(navigate(path))),
 	onMusicSettings: music => (music.mediaid ? dispatch(unloadMedia(music.mediaid)) : dispatch(loadMedia())),
-	onAlarmSettings: alarmConfig => dispatch(calculateDeviceTime(alarmConfig)),
+	onAlarmSettings: possibleAlarm => dispatch(addPossibleAlarm(possibleAlarm)),
+	onAlarmRequest: alarmConfig => dispatch(calculateDeviceTime(alarmConfig)),
 	onBusSettings: busConfig => (dispatch(loadStopInfo({ stopid: busConfig.newStopId, accessToken: busConfig.bus.accessToken }))),
 	onBusRequest: busConfig => (dispatch(timeToArrive(busConfig))),
 });

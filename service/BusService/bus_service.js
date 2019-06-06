@@ -11,9 +11,7 @@ const secrets = require('./secrets.json');
 const login = () => {
 	const url = `https://openapi.emtmadrid.es/v1/mobilitylabs/user/login/`;
 	const options = { headers: secrets };
-	
 	return axios.get(url, options).then((response) => {
-		// handle success
 		const { accessToken } = response.data.data[0];
 		return Promise.resolve(accessToken);
 	})
@@ -23,15 +21,12 @@ service.register('stopdetail', (message) => {
 	const stopid = message.payload.stopid;
 	let accessToken = message.payload.accessToken;
 	let nextStep = new Promise(resolve =>{resolve(accessToken)});
-	
-	if (!accessToken) {
-		nextStep = login();
-	}
+
+	if (!accessToken) {nextStep = login();};
 	nextStep.then(accessToken => {
 		const url = `https://openapi.emtmadrid.es/v1/transport/busemtmad/stops/${stopid}/detail/`;
 		const options = { headers: { accessToken } };
 		axios.get(url, options).then((response) => {
-
 			let stopsInfo = response.data.data[0].stops[0];
 			// handle success
 			message.respond({
@@ -45,8 +40,6 @@ service.register('stopdetail', (message) => {
 			// handle error
 			message.respond({
 				returnValue: false,
-				message: 'Se rompe en STOPDETIL',
-				stopid,
 				error,
 			});
 		});
