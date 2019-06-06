@@ -10,18 +10,20 @@ const AlarmSettingsPanel = kind({
 
 	propTypes: {
 		onClick: PropTypes.func,
+		onRequest: PropTypes.func,
 		onSettings: PropTypes.func,
 		title: PropTypes.string,
 	},
 
+
 	// eslint-disable-next-line
-	render: ({ title, onClick, onSettings, ...rest }) => {
+	render: ({ title, onClick, onRequest, onSettings, ...rest }) => {
 		return (
 			<Panel {...rest}>
 				<Header title={title} titleBelow="Configurando la hora de la alarma.">
 					<Button onClick={onClick}>Atras</Button>
 				</Header>
-				<TimePicker title="¿Cuando quieres despertarte?" defaultValue={new Date()} onChange={onSettings} />
+				<TimePicker title="¿Cuando quieres despertarte?" defaultValue={new Date()} onChange={onSettings} onClose={onRequest} />
 			</Panel>
 		);
 	},

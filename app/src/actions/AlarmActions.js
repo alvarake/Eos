@@ -10,6 +10,17 @@ const setAlarmTimesStamp = alarmtimestamp => ({
 	alarmtimestamp,
 });
 
+const deleteAlarm = alarmtime => ({
+	type: 'DELETE_ALARM_TIME',
+	alarmtime,
+});
+
+export const addPossibleAlarm = possibleAlarm => ({
+	type: 'POSSIBLE_ALARM_WAS_SELECTED',
+	possibleAlarm,
+});
+
+
 const calculateTimeToAlert = (deviceTime, alarmTime) => {
 	const deviceTimeInMins = parseInt(deviceTime.hour, 10) * 60 + parseInt(deviceTime.minute, 10);
 	const alarmTimeInMins = parseInt(alarmTime.split(':')[0], 10) * 60 + parseInt(alarmTime.split(':')[1], 10);
@@ -35,18 +46,13 @@ const calculateTimeToAlert = (deviceTime, alarmTime) => {
 
 const setDeviceAlarm = params => (dispatch) => {
 	console.log('Entramos en setDeviceAlarm');
-	console.log('params');
-	console.log(params);
-
 	const deviceTime = `${params.res.localtime.hour}:${params.res.localtime.minute}`;
-	console.log('deviceTime');
-	console.log(deviceTime);
 	dispatch(setAlarmTimesStamp(deviceTime));
 
-	const timeToAlert = calculateTimeToAlert(params.res.localtime, params.alarmConfig.tiempo);
+	const timeToAlert = calculateTimeToAlert(params.res.localtime, params.alarmSelected);
 	let a = '';
 	let b = '';
-	const mediaId = params.alarmConfig.music.mediaid;
+	const mediaId = params.music.mediaid;
 
 	if (mediaId) {
 		a = new LS2Request().send({
@@ -54,7 +60,7 @@ const setDeviceAlarm = params => (dispatch) => {
 			method: 'set',
 			parameters: {
 				in: timeToAlert,
-				key: 'toast_alarm',
+				key: `${params.alarmSelected} Toast`,
 				uri: 'luna://com.webos.notification/createToast',
 				wakeup: true,
 				params: {
@@ -78,7 +84,7 @@ const setDeviceAlarm = params => (dispatch) => {
 			method: 'set',
 			parameters: {
 				in: timeToAlert,
-				key: 'music_alarm',
+				key: `${params.alarmSelected} Music`,
 				uri: 'luna://com.webos.media/play',
 				wakeup: true,
 				params: {
@@ -103,19 +109,23 @@ const setDeviceAlarm = params => (dispatch) => {
 
 export const calculateDeviceTime = alarmConfig => (dispatch) => {
 	console.log('Entramos en calculateDeviceTime');
-	dispatch(setAlarm(alarmConfig.tiempo));
+	console.log(alarmConfig);
+
+	const alarmSelected = alarmConfig.alarm.possibleAlarms.pop();
+	dispatch(setAlarm(alarmSelected));
 
 	return new LS2Request().send({
 		service: 'luna://com.webos.service.systemservice',
 		method: 'time/getSystemTime',
 		onSuccess: (res) => {
 			console.log(res);
-			dispatch(setDeviceAlarm({ res, alarmConfig }));
+			dispatch(setDeviceAlarm({ res, alarmSelected, music: alarmConfig.music }));
 		},
 		onFailure: (res) => {
 			console.log(res);
 		},
 	});
 };
+
 
 export default calculateDeviceTime;
