@@ -1,4 +1,5 @@
 import LS2Request from '@enact/webos/LS2Request';
+import canciones from '../components/Music/canciones';
 
 export const setMusicSettings = (mediaid) => {
 	console.log('En setMusicSettings');
@@ -7,6 +8,15 @@ export const setMusicSettings = (mediaid) => {
 		mediaid,
 	};
 };
+
+export const setSong = (cancion) => {
+	console.log('En setSong');
+	return {
+		type: 'SET_SONG',
+		cancion,
+	};
+};
+
 
 export const playMedia = (mediaId) => {
 	console.log('En playMedia');
@@ -62,14 +72,15 @@ export const unloadMedia = mediaId => (dispatch) => {
 	});
 };
 
-export const loadMedia = () => (dispatch) => {
+export const loadMedia = music => (dispatch) => {
 	console.log('En loadMedia');
-	console.log(dispatch);
+	const urlCancion = canciones[music.cancion].url;
+
 	return new LS2Request().send({
 		service: 'luna://com.webos.media',
 		method: 'load',
 		parameters: {
-			uri: 'http://se-sycdn.kuwo.cn/resource/n3/67/24/286388541.mp3',
+			uri: urlCancion,
 			type: 'media',
 			payload: {
 				option: {
