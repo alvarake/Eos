@@ -24,7 +24,7 @@ const MusicSettingsPanel = kind({
 	},
 
 	// eslint-disable-next-line
-	render: ({ music, onClick, prueba, onSelect, onSettings, pause, play, title, ...rest }) => {
+	render: ({ music, onClick, onSelect, onSettings, pause, play, title, ...rest }) => {
 		return (
 			<Panel {...rest}>
 				<Header title={title} titleBelow="Configurando el sonido de la alarma.">
