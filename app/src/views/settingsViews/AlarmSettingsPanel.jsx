@@ -11,6 +11,7 @@ const AlarmSettingsPanel = kind({
 
 	propTypes: {
 		alarm: PropTypes.object,
+		music: PropTypes.object,
 		onClick: PropTypes.func,
 		onRequest: PropTypes.func,
 		onDeleteAlarm: PropTypes.func,
@@ -20,14 +21,14 @@ const AlarmSettingsPanel = kind({
 
 
 	// eslint-disable-next-line
-	render: ({ alarm, title, onClick, onDeleteAlarm, onRequest, onSettings, ...rest }) => {
+	render: ({ alarm, music, title, onClick, onDeleteAlarm, onRequest, onSettings, ...rest }) => {
 		return (
 			<Panel {...rest}>
 				<Header title={title} titleBelow="Configurando la hora de la alarma.">
 					<Button onClick={onClick}>Atras</Button>
 				</Header>
-				{alarm.alarms[0] ? <TimePicker title="¿Cuando quieres despertarte?" defaultValue={new Date()} onChange={onSettings} onClose={onRequest} /> : 'No esta configurada la música'}
-				{alarm.alarms[0] ? <AlarmList alarm={alarm} onDelete={onDeleteAlarm} /> : ''}
+				{music.mediaid ? <TimePicker title="¿Cuando quieres despertarte?" defaultValue={new Date()} onChange={onSettings} onClose={onRequest} /> : 'No esta configurada la música'}
+				{music.mediaid ? <AlarmList alarm={alarm} onDelete={onDeleteAlarm} /> : ''}
 			</Panel>
 		);
 	},
