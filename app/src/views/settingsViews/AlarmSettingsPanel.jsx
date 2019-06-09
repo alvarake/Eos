@@ -26,8 +26,8 @@ const AlarmSettingsPanel = kind({
 				<Header title={title} titleBelow="Configurando la hora de la alarma.">
 					<Button onClick={onClick}>Atras</Button>
 				</Header>
-				<TimePicker title="¿Cuando quieres despertarte?" defaultValue={new Date()} onChange={onSettings} onClose={onRequest} />
-				<AlarmList alarm={alarm} onDelete={onDeleteAlarm} />
+				{alarm.alarms[0] ? <TimePicker title="¿Cuando quieres despertarte?" defaultValue={new Date()} onChange={onSettings} onClose={onRequest} /> : 'No esta configurada la música'}
+				{alarm.alarms[0] ? <AlarmList alarm={alarm} onDelete={onDeleteAlarm} /> : ''}
 			</Panel>
 		);
 	},

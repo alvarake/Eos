@@ -22,7 +22,7 @@ const BusArrival = kind({
 		// eslint-disable-next-line no-param-reassign
 		return (
 			<div {...rest}>
-				<h1>{(alarm.alarms[0]) ? 'Las alarmas configuradas son: ' : 'Tienes que configurar alguna alarma.'}</h1>
+				<h1>{(alarm.alarms[0]) ? 'Las alarmas configuradas son: ' : 'No hay ninguna alarma configurada.'}</h1>
 				<ul>{ alarm.alarms ? listadeAlarmas : ''}
 				</ul>
 			</div>

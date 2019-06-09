@@ -17,7 +17,6 @@ export const setSong = (cancion) => {
 	};
 };
 
-
 export const playMedia = (mediaId) => {
 	console.log('En playMedia');
 	return new LS2Request().send({

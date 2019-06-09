@@ -13,7 +13,6 @@ dist
 # misc
 .DS_Store
 npm-debug.log
-eos_0.0.1_all.ipk
 
 service/BusService/secrets.json
 
