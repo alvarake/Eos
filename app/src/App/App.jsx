@@ -62,7 +62,7 @@ const App = kind({
 					<Route path="home" component={MainPanel} title="Home" onClick={onSettingsPanel} bus={bus} music={music} />
 					<Route path="settings" component={SettingsPanel} title="Configuración" arrayItems={items} onClick={onHomePanel} onNavigate={onNavigate}>
 						<Route path="music" component={MusicSettingsPanel} title="Música" onClick={onSettingsPanel} onSettings={onMusicSettings} onSelect={onMusicSelected} music={music} />
-						<Route path="alarm" component={AlarmSettingsPanel} title="Alarma" onClick={onSettingsPanel} onSettings={onAlarmSettings} onDeleteAlarm={onAlarmDeleteRequest} onRequest={onAlarmRequest} alarm={alarm} />
+						<Route path="alarm" component={AlarmSettingsPanel} title="Alarma" onClick={onSettingsPanel} onSettings={onAlarmSettings} onDeleteAlarm={onAlarmDeleteRequest} onRequest={onAlarmRequest} alarm={alarm} music={music} />
 						<Route path="route" component={BusSettingsPanel} title="Parada de Bus" onClick={onSettingsPanel} onSettings={onBusSettings} onRequest={onBusRequest} bus={bus} />
 						<Route path="weather" component={PorHacerSettingsPanel} title="Tiempo Atmosférico" onClick={onSettingsPanel} />
 						<Route path="news" component={PorHacerSettingsPanel} title="Noticias" onClick={onSettingsPanel} />
