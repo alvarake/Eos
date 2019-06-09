@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Repeater from '@enact/ui/Repeater';
+import css from '../../components/ItemConfigurable/ItemConfigurable.less';
 
 import ItemConfig from '../../components/ItemConfigurable/ItemConfigurable';
 
@@ -18,6 +19,7 @@ const SettingsPanel = kind({
 		arrayItems: PropTypes.array,
 	},
 
+
 	// eslint-disable-next-line
 	render: ({ title, onClick, onNavigate, arrayItems, ...rest }) => {
 		return (
@@ -25,9 +27,11 @@ const SettingsPanel = kind({
 				<Header title={title} titleBelow="Menú de configuración.">
 					<Button onClick={onClick}> Home </Button>
 				</Header>
-				<Repeater childComponent={ItemConfig} indexProp="index" itemProps={{ onSelect: onNavigate }}>
-					{arrayItems}
-				</Repeater>
+				<div align="center">
+					<Repeater childComponent={ItemConfig} indexProp="index" itemProps={{ onSelect: onNavigate }}>
+						{arrayItems}
+					</Repeater>
+				</div>
 			</Panel>
 		);
 	},
