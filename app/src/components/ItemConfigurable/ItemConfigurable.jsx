@@ -34,7 +34,7 @@ const ItemConfigBase = kind({
 		delete rest.index;
 		return (
 			<div {...rest} onClick={onSelect} onKeyPress={onSelect} role="button" tabIndex="0">
-				<img alt="Menu" src={url} width="315" height="400" />
+				<img alt="Menu" src={url} width="355" height="700" />
 				<div>{text}</div>
 			</div>
 		);
