@@ -15,7 +15,7 @@ const BusArrival = kind({
 		const arrayLineas = bus.stopsInfo ? bus.stopsInfo.dataLine : [];
 		const stopsElement = (
 			<div>
-				Las líneas de la parada {bus.stopid} son:
+				Las líneas de la parada {bus.stopsInfo.stop} son:
 				{arrayLineas.map((linea) => {
 					if (bus.stopsInfo) {
 						const infoPardas = <p>{linea.label}: [{linea.headerA}  =&gt; {linea.headerB}]</p>;

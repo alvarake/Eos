@@ -28,6 +28,13 @@ const setLastBusRequest = (lastArrivalsRequest) => {
 	};
 };
 
+const setLastStopRequest = (lastStopRequest) => {
+	return {
+		type: 'SET_LAST_STOP_REQUEST',
+		lastStopRequest,
+	};
+};
+
 const setStopsInfo = (stopsInfo) => {
 	console.log('En stopsInfo');
 	return {
@@ -59,13 +66,17 @@ export const timeToArrive = ({ stopid, accessToken, lastArrivalsRequest }) => (d
 	return ArrivalsRequest;
 };
 
-export const loadStopInfo = ({ stopid, accessToken }) => (dispatch) => {
+export const loadStopInfo = ({ stopid, bus }) => (dispatch) => {
+
 	console.log('En loadStopInfo');
+	if (bus.lastStopRequest) {
+		bus.lastStopRequest.cancel();
+	}
 	dispatch(setBusSettings(stopid));
-	return new LS2Request().send({
+	const stopRequest = new LS2Request().send({
 		service: 'luna://eos.busservice',
 		method: 'stopdetail',
-		parameters: { stopid, accessToken },
+		parameters: { stopid, accessToken: bus.accessToken },
 		onSuccess: (res) => {
 			dispatch(setEMTAccessToken(res.accessToken));
 			dispatch(setStopsInfo(res.stopsInfo));
@@ -74,4 +85,6 @@ export const loadStopInfo = ({ stopid, accessToken }) => (dispatch) => {
 			console.log(res);
 		},
 	});
+	dispatch(setLastStopRequest(stopRequest));
+	return stopRequest;
 };

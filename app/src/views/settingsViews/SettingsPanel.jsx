@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Repeater from '@enact/ui/Repeater';
-import css from '../../components/ItemConfigurable/ItemConfigurable.less';
 
 import ItemConfig from '../../components/ItemConfigurable/ItemConfigurable';
 

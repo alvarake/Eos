@@ -22,6 +22,7 @@ const mapStateToProps = (state) => {
 			stopid: state.bus.stopid,
 			arrivals: state.bus.arrivals,
 			lastArrivalsRequest: state.bus.lastArrivalsRequest,
+			lastStopRequest: state.bus.lastStopRequest,
 			stopsInfo: state.bus.stopsInfo,
 		},
 	};
@@ -36,7 +37,7 @@ const mapDispatchToProps = dispatch => ({
 	onAlarmRequest: alarmConfig => dispatch(calculateDeviceTime(alarmConfig)),
 	onAlarmDeleteRequest: alarmKey => dispatch(deleteOneAlarm(alarmKey)),
 
-	onBusSettings: busConfig => (dispatch(loadStopInfo({ stopid: busConfig.newStopId, accessToken: busConfig.bus.accessToken }))),
+	onBusSettings: busConfig => (dispatch(loadStopInfo({ stopid: busConfig.newStopId, bus: busConfig.bus }))),
 	onBusRequest: busConfig => (dispatch(timeToArrive(busConfig))),
 });
 
