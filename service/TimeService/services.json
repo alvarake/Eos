@@ -1,0 +1,9 @@
+{
+  "id": "eos.timeservice",
+  "description": "Time Service",
+  "services": [
+    {
+      "name": "eos.timeservice"
+    }
+  ]
+}
