@@ -1,6 +1,8 @@
+# eOS
+
 Aplicación para Raspberry Pi 3 con  webOS OSE. Esta aplicación en un asistente personal.
 
-#Instalación
+## Instalación
 
 Para poder ejecutar la aplicación eOS en una Raspberry Pi 3 se necesita el paquete .ipk, este paquete se encuentra en el repositorio. 
 
