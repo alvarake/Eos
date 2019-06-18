@@ -37,10 +37,12 @@ const MainPanel = kind({
 		return (
 			<Panel {...rest}>
 				<Header title={title} titleBelow="Pantalla Principal">
+					{((music.mediaid) ? <Button onClick={pause}>DESPIERTO</Button> : "")}
 					<Button onClick={onClick}>Configuración</Button>
 				</Header>
-				{((music.mediaid) ? <Button onClick={pause}>DESPIERTO</Button> : <h1>Tienes que configurar una alarma.</h1>)}
+
 				<Scroller>
+					{((music.mediaid) ? "": <h1>Tienes que configurar una alarma.</h1>)}
 					{((bus.stopid) ? cargandoAutobuses() : <h1>Tienes que configurar una parada de bus.</h1>)}
 				</Scroller>
 			</Panel>
